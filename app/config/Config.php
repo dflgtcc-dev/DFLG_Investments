@@ -16,7 +16,7 @@ if (session_status() === PHP_SESSION_NONE) {
 //Configuração do Sistema
 define('APP_NAME', 'DFLG Investments');
 date_default_timezone_set('America/Sao_Paulo');
-define('URL_BASE', 'http://localhost/DFLG');
+define('URL_BASE', 'https://dflg-investments.ethiodeploy.app/');
 
 //Configurações do Banco de dados
 define('DB_HOST', 'localhost');
