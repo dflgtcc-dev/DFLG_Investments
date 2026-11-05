@@ -1,0 +1,492 @@
+/* Home e telas de autenticação (login, cadastro): identidade DFLG, preto com o verde da logo.
+   A home é sempre escura. No login e no cadastro o tema claro/escuro (data-bs-theme do <html>) vale só para o cartão:
+   o fundo da página e os botões do topo ficam sempre escuros. Carregar depois do style.css. */
+
+/* paleta clara */
+body.dflg-pagina,
+.auth-card {
+    --h-superficie: #ffffff;
+    --h-texto: #0b1410;
+    --h-suave: #5b6770;
+    --h-borda: rgba(0, 0, 0, 0.09);
+    --h-verde-texto: #007a3b;
+    --h-brilho: rgba(8, 240, 104, 0.2);
+}
+
+/* paleta escura: no tema escuro e, no login e no cadastro, sempre na página (o cartão segue o tema) */
+[data-bs-theme="dark"] body.dflg-pagina,
+[data-bs-theme="dark"] .auth-card,
+body.auth-pagina {
+    --h-superficie: #0b1510;
+    --h-texto: #ffffff;
+    --h-suave: rgba(255, 255, 255, 0.62);
+    --h-borda: rgba(255, 255, 255, 0.1);
+    --h-verde-texto: var(--dflg-verde);
+    --h-brilho: rgba(8, 240, 104, 0.22);
+}
+
+body.dflg-pagina {
+    position: relative;
+    min-height: 100vh;
+    color: var(--h-texto);
+    background: radial-gradient(circle at 88% -5%, var(--h-brilho), transparent 45%), #f4f5f9;
+    background-attachment: fixed;
+}
+
+[data-bs-theme="dark"] body.dflg-pagina,
+body.auth-pagina {
+    background: radial-gradient(circle at 88% -5%, var(--h-brilho), transparent 45%), linear-gradient(135deg, #000000 0%, #07140d 100%);
+    background-attachment: fixed;
+}
+
+.h-suave { color: var(--h-suave); }
+.h-destaque { color: var(--h-verde-texto); }
+
+/* botões: tema (lua/sol) e voltar para a home (casinha) */
+.btn-icone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--h-texto);
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid var(--h-borda);
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.btn-icone:hover {
+    color: #000000;
+    background: var(--dflg-verde);
+    border-color: var(--dflg-verde);
+}
+
+/* mostra o ícone do tema para o qual o clique vai trocar: sol no escuro, lua no claro */
+.tema-botao .bi-sun-fill { display: none; }
+[data-bs-theme="dark"] .tema-botao .bi-sun-fill { display: inline; }
+[data-bs-theme="dark"] .tema-botao .bi-moon-stars-fill { display: none; }
+
+.btn-contorno {
+    color: var(--h-texto);
+    font-weight: 600;
+    background: transparent;
+    border: 1px solid var(--h-borda);
+}
+
+.btn-contorno:hover {
+    color: var(--h-verde-texto);
+    border-color: var(--dflg-verde);
+}
+
+/* Home, login e cadastro: mesma letra; tamanho e espaços do texto corrido só na home */
+body.home-pagina,
+body.auth-pagina {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+body.home-pagina {
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+/* branco puro sobre preto cansa a vista: texto levemente acinzentado (home, página e cartão escuro do login e do cadastro) */
+[data-bs-theme="dark"] body.home-pagina,
+body.auth-pagina,
+[data-bs-theme="dark"] .auth-card {
+    --h-texto: #e8ece9;
+    --h-suave: rgba(232, 236, 233, 0.68);
+    --h-borda: rgba(255, 255, 255, 0.12);
+}
+
+.home-marca {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--h-texto);
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.home-marca img { height: 44px; }
+
+/* botões do topo: o verde fica só para a ação principal (Começar agora) */
+.home-pagina nav .btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.6rem;
+}
+
+.btn-claro {
+    color: var(--h-superficie);
+    font-weight: 600;
+    background: var(--h-texto);
+    border: 1px solid var(--h-texto);
+}
+
+.btn-claro:hover {
+    color: var(--h-superficie);
+    background: var(--h-suave);
+    border-color: var(--h-suave);
+}
+
+/* selo neutro; o verde é só o pontinho */
+.home-selo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 1.1rem;
+    color: var(--h-suave);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    background: rgba(127, 127, 127, 0.08);
+    border: 1px solid var(--h-borda);
+    border-radius: 999px;
+}
+
+.home-selo::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--dflg-verde);
+    border-radius: 50%;
+}
+
+.home-hero {
+    padding: 6rem 0 7rem;
+    text-align: center;
+}
+
+.home-hero .home-selo { margin-bottom: 2rem; }
+
+.home-hero h1 {
+    max-width: 900px;
+    margin: 0 auto 1.75rem;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+}
+
+.home-hero .lead {
+    max-width: 44rem;
+    margin: 0 auto 2.75rem;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.home-hero .btn-lg,
+.home-cta .btn-lg {
+    padding: 0.9rem 2.25rem;
+    font-size: 1.1rem;
+    border-radius: 0.75rem;
+}
+
+/* cada seção da home, com o título e o subtítulo no cabeçalho */
+.home-secao { margin-bottom: 8rem; }
+
+.home-secao-cab {
+    margin-bottom: 3.5rem;
+    text-align: center;
+}
+
+.home-secao-cab h2 {
+    margin-bottom: 0.9rem;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.home-secao-cab p {
+    margin-bottom: 0;
+    font-size: 1.15rem;
+}
+
+.home-recurso {
+    height: 100%;
+    padding: 2rem;
+    background: var(--h-superficie);
+    border: 1px solid var(--h-borda);
+    border-radius: 1.25rem;
+    transition: all 0.2s;
+}
+
+.home-recurso:hover {
+    border-color: var(--h-suave);
+    transform: translateY(-4px);
+}
+
+.home-recurso h5 {
+    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.home-recurso p {
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+/* ícone: bloco neutro, só o desenho é verde */
+.home-recurso-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--h-verde-texto);
+    font-size: 1.45rem;
+    background: rgba(127, 127, 127, 0.12);
+    border-radius: 0.9rem;
+}
+
+/* Dúvidas frequentes: ocupa a largura do container e é dividida por linhas, sem cartões */
+.home-faq .accordion {
+    --bs-accordion-bg: transparent;
+    --bs-accordion-border-width: 0;
+    --bs-accordion-border-radius: 0;
+    --bs-accordion-inner-border-radius: 0;
+    border-top: 1px solid var(--h-borda);
+}
+
+.home-faq .accordion-item {
+    color: var(--h-texto);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--h-borda);
+    border-radius: 0;
+}
+
+.home-faq .accordion-button {
+    padding: 1.6rem 0;
+    color: var(--h-texto);
+    font-size: 1.15rem;
+    font-weight: 500;
+    background: transparent;
+    box-shadow: none;
+}
+
+.home-faq .accordion-button:not(.collapsed) {
+    color: var(--h-texto);
+    font-weight: 600;
+}
+
+/* a setinha padrão do Bootstrap é azul; fica em cinza neutro */
+.home-faq .accordion-button::after { filter: grayscale(1); }
+
+.home-faq .accordion-button:focus-visible {
+    box-shadow: 0 0 0 0.2rem rgba(8, 240, 104, 0.2);
+}
+
+.home-faq .accordion-body {
+    max-width: 60rem;
+    padding: 0 0 1.9rem;
+    color: var(--h-suave);
+    line-height: 1.75;
+}
+
+/* Chamada final para ação */
+.home-cta {
+    position: relative;
+    padding: 2rem 2rem 4rem;
+    text-align: center;
+}
+
+.home-cta h2 {
+    margin-bottom: 1rem;
+    color: var(--h-texto);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.home-cta p {
+    max-width: 550px;
+    margin: 0 auto 2.5rem;
+    color: var(--h-suave);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.home-cta-selo { margin-top: 3rem; }
+
+.home-rodape {
+    margin-top: 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--h-borda);
+    color: var(--h-suave);
+    font-size: 0.9rem;
+}
+
+.home-rodape-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.home-rodape-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.home-rodape a {
+    color: var(--h-suave);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.home-rodape a:hover { color: var(--h-verde-texto); }
+
+
+
+@media (max-width: 576px) {
+    .home-hero { padding: 4rem 0 4.5rem; }
+    .home-secao { margin-bottom: 5rem; }
+    .home-secao-cab { margin-bottom: 2.5rem; }
+
+    .home-rodape-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-rodape-links { justify-content: center; }
+}
+
+/* Login e cadastro */
+.auth-pagina {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.auth-topo {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+
+.auth-card {
+    width: 100%;
+    padding: 1.75rem 1.75rem 1.5rem;
+    color: var(--h-texto);
+    background: var(--h-superficie);
+    border: 1px solid var(--h-borda);
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    color-scheme: light;
+}
+
+[data-bs-theme="dark"] .auth-card { color-scheme: dark; }
+
+/* barra de rolagem e campos de fora do cartão seguem a página, que é sempre escura */
+:root:has(body.auth-pagina) { color-scheme: dark; }
+
+.auth-card .card-title {
+    margin-bottom: 0.5rem;
+    color: var(--h-texto);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+/* links neutros e sublinhados; o verde fica para o botão principal e o foco dos campos */
+.auth-card a {
+    color: var(--h-texto);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--h-borda);
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+}
+
+.auth-card a:hover {
+    color: var(--h-verde-texto);
+    text-decoration-color: currentColor;
+}
+
+.auth-card .form-label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.auth-card .form-control,
+.auth-card .input-group-text {
+    padding: 0.6rem 0.85rem;
+}
+
+.auth-card .btn-dflg {
+    padding: 0.7rem;
+    font-size: 1rem;
+    border-radius: 0.75rem;
+}
+
+.auth-card .input-group-text {
+    background: transparent;
+    border-right: none;
+}
+
+.auth-card .input-group .form-control { border-left: none; }
+
+.auth-card .form-control:focus {
+    border-color: var(--h-suave);
+    box-shadow: none;
+}
+
+.auth-card .input-group:focus-within .input-group-text { border-color: var(--h-suave); }
+
+@media (max-width: 576px) {
+    .auth-pagina { padding-top: 4rem; }
+    .auth-card { padding: 1.5rem 1.25rem; }
+}
+
+/* Login e cadastro: visual neutro, o verde fica só na logo e num detalhe pequeno */
+body.dflg-pagina.auth-pagina {
+    --h-brilho: rgba(255, 255, 255, 0.05);
+    background: radial-gradient(circle at 88% -5%, var(--h-brilho), transparent 45%), linear-gradient(135deg, #000000 0%, #0c0d0d 100%);
+    background-attachment: fixed;
+}
+
+body.auth-pagina .auth-card { --h-verde-texto: var(--h-texto); }
+[data-bs-theme="dark"] body.auth-pagina .auth-card { --h-superficie: #111312; }
+
+.auth-topo .btn-icone:hover {
+    color: var(--h-texto);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--h-suave);
+}
+
+.auth-card .home-selo {
+    padding: 0.3rem 0.9rem;
+    font-size: 0.78rem;
+}
+
+/* botão principal neutro (claro no tema escuro, escuro no tema claro) */
+.auth-card .btn-dflg {
+    color: var(--h-superficie);
+    background: var(--h-texto);
+    border: 1px solid var(--h-texto);
+}
+
+.auth-card .btn-dflg:hover {
+    color: var(--h-superficie);
+    background: var(--h-texto);
+    opacity: 0.85;
+}

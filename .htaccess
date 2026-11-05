@@ -1,0 +1,13 @@
+
+RewriteEngine On
+RewriteBase /DFLG/
+
+# Encaminha os arquivos públicos de assets
+RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
+# Evita reescrever novamente arquivos acessados pela pasta public
+RewriteRule ^public/ - [L]
+
+# Encaminha a página inicial e as demais rotas para o roteador
+RewriteRule ^$ public/index.php [QSA,L]
+RewriteRule ^(.*)$ public/index.php [QSA,L]

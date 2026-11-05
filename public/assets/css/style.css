@@ -1,0 +1,532 @@
+/* Layout padrão (dashboard, transações, metas, parcelamentos) */
+body {
+    background-color: #f4f5f9;
+}
+
+
+.navbar-dflg {
+    background-color: #000000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+
+/* Navbar clean: links em texto simples, sempre visíveis */
+.nav-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.nav-link-dflg {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-link-dflg:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Botão sanduíche */
+.btn-sanduiche {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.btn-sanduiche:hover,
+.btn-sanduiche[aria-expanded="true"] {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.dropdown-dflg {
+    min-width: 12rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+
+.stat-card {
+    border: none;
+    border-radius: 1rem;
+}
+
+/* Modo escuro (RNF 07): o Bootstrap aplica data-bs-theme="dark" no <html> */
+[data-bs-theme="dark"] body {
+    background-color: #14161a;
+}
+
+/* bg-light e table-light têm cor fixa no Bootstrap; no modo escuro usam a cor de superfície dele */
+[data-bs-theme="dark"] .bg-light {
+    background-color: var(--bs-tertiary-bg) !important;
+}
+
+[data-bs-theme="dark"] .table-light {
+    --bs-table-color: var(--bs-body-color);
+    --bs-table-bg: var(--bs-tertiary-bg);
+    --bs-table-border-color: var(--bs-border-color);
+}
+
+/* Páginas de autenticação (login, cadastro) */
+.auth-card {
+    width: 100%;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: none;
+}
+
+.auth-card .card-title {
+    font-weight: 700;
+    color: #333;
+}
+
+/* Pódio do ranking (RF 10): usa as cores do tema, então funciona no modo claro e no escuro */
+.podio {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.podio-lugar {
+    flex: 1 1 0;
+    max-width: 220px;
+    padding: 1rem 0.5rem;
+    text-align: center;
+    background-color: var(--bs-tertiary-bg);
+    border-top: 6px solid;
+    border-radius: 1rem 1rem 0 0;
+    overflow-wrap: anywhere;
+}
+
+.podio-1 {
+    min-height: 200px;
+    border-top-color: #f5b301;
+}
+
+.podio-2 {
+    min-height: 160px;
+    border-top-color: #adb5bd;
+}
+
+.podio-3 {
+    min-height: 130px;
+    border-top-color: #cd7f32;
+}
+
+.podio-medalha {
+    font-size: 2rem;
+}
+
+.podio-1 .podio-medalha {
+    color: #f5b301;
+}
+
+.podio-2 .podio-medalha {
+    color: #adb5bd;
+}
+
+.podio-3 .podio-medalha {
+    color: #cd7f32;
+}
+
+.podio-nick {
+    margin: 0.25rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* Dashboard (RF 07): identidade DFLG, preto com o verde da logo */
+:root {
+    --dflg-verde: #08f068;
+}
+
+.dash-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 1.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.dash-ola {
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.dash-sub {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.dash-rotulo {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.dash-saldo {
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.dash-saldo-pos {
+    color: var(--dflg-verde);
+}
+
+.dash-saldo-neg {
+    color: #ff6b6b;
+}
+
+.dash-kpi {
+    height: 100%;
+    padding: 0.85rem 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+}
+
+.dash-kpi-rotulo {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.8rem;
+}
+
+.dash-kpi-valor {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.dash-var {
+    display: inline-block;
+    margin-top: 0.3rem;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 999px;
+}
+
+.dash-var-boa {
+    color: var(--dflg-verde);
+    background: rgba(8, 240, 104, 0.16);
+}
+
+.dash-var-ruim {
+    color: #ff8a8a;
+    background: rgba(255, 107, 107, 0.16);
+}
+
+.dash-var-neutra {
+    color: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.dash-comparacao {
+    margin-top: 0.6rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+}
+
+.dash-mes {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.4rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+}
+
+.dash-mes-nome {
+    min-width: 9.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.dash-mes-botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    color: #ffffff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+a.dash-mes-botao:hover {
+    color: #000000;
+    background: var(--dflg-verde);
+}
+
+.dash-mes-botao.desativado {
+    opacity: 0.25;
+}
+
+.dash-nivel {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+}
+
+.dash-xp {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.dash-xp .progress-bar {
+    background: var(--dflg-verde);
+}
+
+.btn-dflg {
+    color: #000000;
+    font-weight: 700;
+    background: var(--dflg-verde);
+    border: none;
+}
+
+.btn-dflg:hover {
+    color: #000000;
+    background: #3dff8c;
+}
+
+.dash-card {
+    border: none;
+    border-radius: 1.25rem;
+}
+
+.dash-card .card-title {
+    font-weight: 700;
+}
+
+.dash-chart {
+    position: relative;
+    height: 280px;
+}
+
+.dash-chart-rosca {
+    height: 230px;
+}
+
+.dash-cor {
+    display: inline-block;
+    flex: none;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+}
+
+.dash-ritmo-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.dash-barra-meta .progress-bar {
+    background: var(--dflg-verde);
+}
+
+/* permite que o texto de um item de lista encolha (com reticências) em vez de empurrar o valor para outra linha */
+.dash-min0 {
+    min-width: 0;
+}
+
+/* ==========================================================================
+   Responsividade (celular e tablet)
+   Bootstrap: sm >= 576px, md >= 768px, lg >= 992px
+   ========================================================================== */
+
+/* Dashboard: o topo é sempre escuro (no tema claro o texto branco sumia no fundo claro) */
+.dash-hero {
+    color: #ffffff;
+    background: #111317;
+}
+
+[data-bs-theme="dark"] .dash-hero {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Link da página atual no menu */
+.nav-link-dflg.ativo {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.dropdown-dflg .dropdown-item.ativo {
+    font-weight: 600;
+}
+
+/* Cabeçalho das páginas (título + botões): quebra linha em vez de espremer o título */
+.cabecalho-pagina h2 {
+    overflow-wrap: anywhere;
+}
+
+/* Tabelas viram cartões no celular.
+   Cada <td> leva data-label com o nome da coluna; classes de apoio:
+   td-titulo (linha principal, sem rótulo), td-bloco (rótulo em cima, conteúdo embaixo) e td-acoes (botões) */
+@media (max-width: 767.98px) {
+    .tabela-cards thead {
+        display: none;
+    }
+
+    .tabela-cards,
+    .tabela-cards tbody,
+    .tabela-cards tfoot,
+    .tabela-cards tr {
+        display: block;
+        width: 100%;
+    }
+
+    .tabela-cards tr {
+        padding: 0.9rem 1rem;
+        border-bottom: 1px solid var(--bs-border-color);
+    }
+
+    .tabela-cards tbody tr:last-child {
+        border-bottom: 0;
+    }
+
+    .tabela-cards tfoot tr {
+        border-top: 2px solid var(--bs-border-color);
+        border-bottom: 0;
+        background-color: var(--bs-tertiary-bg);
+    }
+
+    .tabela-cards td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        min-width: 0 !important;
+        padding: 0.2rem 0 !important;
+        text-align: right !important;
+        border: 0;
+        background: transparent;
+        box-shadow: none !important;
+    }
+
+    .tabela-cards td::before {
+        content: attr(data-label);
+        flex: none;
+        color: var(--bs-secondary-color);
+        font-size: 0.85rem;
+        font-weight: 400;
+        text-align: left;
+    }
+
+    .tabela-cards td.td-titulo {
+        display: block;
+        padding-bottom: 0.45rem !important;
+        text-align: left !important;
+    }
+
+    .tabela-cards td.td-bloco {
+        display: block;
+        padding-top: 0.5rem !important;
+        text-align: left !important;
+    }
+
+    .tabela-cards td.td-bloco::before {
+        display: block;
+        margin-bottom: 0.3rem;
+    }
+
+    .tabela-cards td.td-titulo::before,
+    .tabela-cards td.td-acoes::before,
+    .tabela-cards td[colspan]::before {
+        content: none;
+    }
+
+    .tabela-cards td.td-acoes {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 0.4rem;
+        padding-top: 0.7rem !important;
+    }
+
+    .tabela-cards td.td-acoes form {
+        margin: 0;
+    }
+
+    .tabela-cards td[colspan] {
+        display: block;
+        text-align: center !important;
+    }
+
+    /* coluna que só repete informação já visível no cartão (ex.: tipo, já mostrado pela cor e pelo sinal do valor) */
+    .tabela-cards td.td-oculta-celular {
+        display: none;
+    }
+}
+
+/* Celular */
+@media (max-width: 575.98px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .navbar-dflg.mb-4 {
+        margin-bottom: 1rem !important;
+    }
+
+    .navbar-dflg .navbar-brand img {
+        height: 30px;
+    }
+
+    .card-body.p-4 {
+        padding: 1rem !important;
+    }
+
+    .cabecalho-pagina {
+        margin-bottom: 1rem !important;
+    }
+
+    /* grupo de botões do cabeçalho vai para a linha de baixo, inteiro */
+    .cabecalho-pagina > div {
+        flex: 1 1 100%;
+    }
+
+    .dash-hero {
+        padding: 1.15rem;
+        border-radius: 1.1rem;
+    }
+
+    .dash-mes-nome {
+        min-width: 0;
+    }
+
+    .dash-chart {
+        height: 230px;
+    }
+
+    .podio {
+        gap: 0.4rem;
+    }
+
+    .podio-nick {
+        font-size: 0.95rem;
+    }
+
+    .auth-card {
+        padding: 1.25rem;
+    }
+
+    /* menu sanduíche ocupa quase a largura da tela */
+    .dropdown-dflg {
+        min-width: min(16rem, calc(100vw - 2rem));
+    }
+}
