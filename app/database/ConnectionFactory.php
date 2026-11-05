@@ -15,8 +15,23 @@ class ConnectionFactory {
 
             try {
 
-                $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME ;
-                self::$connection = self::createConnection($dsn);
+                //$dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME ;
+                //self::$connection = self::createConnection($dsn);
+
+                //$dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME ;
+                //self::$connection = self::createConnection($dsn);
+
+                $url = parse_url(getenv('DATABASE_URL'));
+
+                $dsn = "mysql:host={$url['host']};port={$url['port']};dbname=" . ltrim($url['path'], '/');
+                
+                self::$connection = new PDO(
+                    $dsn,
+                    $url['user'],
+                    $url['pass']
+                );
+
+                
                 (new DatabaseInitializer())->migrate(self::$connection);
 
             } catch(Exception $e){
