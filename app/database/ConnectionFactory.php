@@ -21,18 +21,21 @@ class ConnectionFactory {
 
             } catch(Exception $e){
 
+                print($e->getMessage());
+                exit;
+
                 // RNF 04: o detalhe técnico vai só para o log, nunca para a tela do usuário
-                error_log("Não foi possível acessar o banco " . DB_NAME . ": " . $e->getMessage() . " (tentando inicializar)");
+                // error_log("Não foi possível acessar o banco " . DB_NAME . ": " . $e->getMessage() . " (tentando inicializar)");
 
-                $dsn = "mysql:host=" . DB_HOST;
-                self::$connection = self::createConnection($dsn);
+                // $dsn = "mysql:host=" . DB_HOST;
+                // self::$connection = self::createConnection($dsn);
 
-                $databaseInit = new DatabaseInitializer();
-                $databaseInit->init(self::$connection);
+                // $databaseInit = new DatabaseInitializer();
+                // $databaseInit->init(self::$connection);
 
-                // Re-attempt after initialization
-                $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME ;
-                self::$connection = self::createConnection($dsn);
+                // // Re-attempt after initialization
+                // $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME ;
+                // self::$connection = self::createConnection($dsn);
 
             }
         }
