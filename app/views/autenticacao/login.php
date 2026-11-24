@@ -87,6 +87,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= URL_BASE ?>/assets/js/senha.js"></script>
 </body>
 
 </html>
