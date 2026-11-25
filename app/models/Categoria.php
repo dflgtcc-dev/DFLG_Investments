@@ -6,22 +6,16 @@ class Categoria
 {
     private int $id;
     private string $nome;
-    private ?string $icone;
     private string $tipo;
-    private ?float $limiteOrcamento;
 
     public function __construct(
         int $id,
         string $nome,
-        ?string $icone = null,
-        string $tipo = 'despesa',
-        ?float $limiteOrcamento = null
+        string $tipo = 'despesa'
     ) {
         $this->id = $id;
         $this->nome = $nome;
-        $this->icone = $icone;
         $this->tipo = $tipo;
-        $this->limiteOrcamento = $limiteOrcamento;
     }
 
     public function getId(): int
@@ -44,9 +38,7 @@ class Categoria
         return new self(
             $categoria['id'],
             $categoria['nome'],
-            $categoria['icone'],
-            $categoria['tipo'],
-            $categoria['limite_orcamento'] !== null ? (float) $categoria['limite_orcamento'] : null
+            $categoria['tipo']
         );
     }
 }
