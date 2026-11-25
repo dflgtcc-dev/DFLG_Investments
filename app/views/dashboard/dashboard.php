@@ -2,6 +2,7 @@
 /**
  * Variáveis disponibilizadas pelo controller (via Controller::view/extract).
  * @var mixed $categoriasExcedidas
+ * @var mixed $lembretesParcelas
  * @var mixed $gamificacao
  * @var mixed $painel
  * @var mixed $progressoNivel
@@ -57,6 +58,7 @@ $parcelas = $painel['parcelas'];
     <div class="container pb-5">
 
         <?php require __DIR__ . '/../partials/alerta_limites.php'; ?>
+        <?php require __DIR__ . '/../partials/alerta_parcelas.php'; ?>
 
         <!-- TOPO: saldo, resumo do mês, nível e atalhos -->
         <section class="dash-hero shadow-sm h-100 mb-4">
