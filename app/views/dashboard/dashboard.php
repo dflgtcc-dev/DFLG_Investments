@@ -144,7 +144,7 @@ $parcelas = $painel['parcelas'];
                                 aria-valuenow="<?= $progressoNivel['percentual'] ?>" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-bar" style="width: <?= $progressoNivel['percentual'] ?>%"></div>
                             </div>
-                            <div class="small mt-2" style="color: rgba(255, 255, 255, 0.65);">
+                            <div class="small mt-2 dash-xp-texto">
                                 <?= $progressoNivel['xpNoNivel'] ?> / <?= $progressoNivel['xpParaProximo'] ?> XP para o nível <?= $gamificacao->getNivel() + 1 ?>
                             </div>
                         </div>
