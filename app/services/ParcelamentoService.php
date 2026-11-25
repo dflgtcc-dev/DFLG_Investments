@@ -15,6 +15,9 @@ class ParcelamentoService
     public const DATA_MINIMA = '2000-01-01';
     public const DATA_MAXIMA = '2099-12-31';
 
+    // com quantos dias de antecedência o sistema avisa que uma parcela está perto de vencer
+    public const DIAS_LEMBRETE = 3;
+
     private ParcelamentoRepository $repository;
     private CategoriaService $categoriaService;
     private array $erros = [];
@@ -28,6 +31,50 @@ class ParcelamentoService
     public function getParcelamentos(int $usuarioId): array
     {
         return $this->repository->getParcelamentosPorUsuario($usuarioId);
+    }
+
+    // lembrete: próxima parcela (ainda não lançada) de cada parcelamento que vence nos próximos
+    // $dias dias ou que já venceu. Parcela lançada deixa de aparecer, então o lembrete some sozinho.
+    public function getLembretesParcelas(int $usuarioId, int $dias = self::DIAS_LEMBRETE): array
+    {
+        return self::montarLembretes($this->repository->getParcelamentosPorUsuario($usuarioId), date('Y-m-d'), $dias);
+    }
+
+    // regra pura do lembrete (sem banco), para poder ser testada com datas fixas.
+    // 'dias' é quantos dias faltam para vencer: 0 = hoje, negativo = já venceu
+    public static function montarLembretes(array $parcelamentos, string $hoje, int $dias): array
+    {
+        $dataHoje = new \DateTimeImmutable($hoje);
+        $limite = $dataHoje->modify("+{$dias} days")->format('Y-m-d');
+        $lembretes = [];
+
+        foreach ($parcelamentos as $parcelamento) {
+            $numero = $parcelamento->getNumeroProximaParcela();
+
+            if ($numero === null) {
+                continue;
+            }
+
+            $vencimento = $parcelamento->getDataVencimento($numero);
+
+            if ($vencimento > $limite) {
+                continue;
+            }
+
+            $lembretes[] = [
+                'parcelamentoId' => $parcelamento->getId(),
+                'numero' => $numero,
+                'descricao' => $parcelamento->getDescricaoParcela($numero),
+                'valor' => $parcelamento->getValorParcela(),
+                'vencimento' => $vencimento,
+                'dias' => (int) $dataHoje->diff(new \DateTimeImmutable($vencimento))->format('%r%a'),
+                'atrasadas' => $parcelamento->getParcelasAtrasadas($hoje),
+            ];
+        }
+
+        usort($lembretes, fn ($a, $b) => [$a['vencimento'], $a['parcelamentoId']] <=> [$b['vencimento'], $b['parcelamentoId']]);
+
+        return $lembretes;
     }
 
     public function getParcelamento(int $id, int $usuarioId)
