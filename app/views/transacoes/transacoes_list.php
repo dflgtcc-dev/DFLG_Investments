@@ -3,6 +3,7 @@
  * Variáveis disponibilizadas pelo controller (via Controller::view/extract).
  * @var mixed $categorias
  * @var mixed $categoriasExcedidas
+ * @var mixed $lembretesParcelas
  * @var array $filtros
  * @var array $errosFiltro
  * @var array $resumoLista
@@ -35,6 +36,7 @@
     <div class="container pb-5">
 
         <?php require __DIR__ . '/../partials/alerta_limites.php'; ?>
+        <?php require __DIR__ . '/../partials/alerta_parcelas.php'; ?>
 
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4 cabecalho-pagina">
             <h2 class="mb-0"><i class="bi bi-cash-stack me-2"></i>Minhas Finanças</h2>
