@@ -1,0 +1,5 @@
+FPDF 1.84 (biblioteca para gerar PDF em PHP)
+Autor: Olivier Plathey - http://www.fpdf.org
+Licença: permissiva - uso, cópia, modificação e distribuição livres, sem garantia.
+Arquivos originais, sem alteração: fpdf.php e a pasta font/.
+Usada em: app/helpers/ExtratoPdf.php (RF 11 - extrato em PDF).
