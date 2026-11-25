@@ -76,7 +76,7 @@ $valores = $valores ?? [];
                                         </td>
                                         <td class="px-4 py-3 text-end text-nowrap" data-label="Gasto no mês">R$ <?= number_format($categoria['gasto'], 2, ',', '.') ?></td>
                                         <td class="px-4 py-3 td-bloco" data-label="Limite mensal (R$)">
-                                            <input type="number" step="0.01" min="0.01" inputmode="decimal"
+                                            <input type="number" step="0.01" min="0.01" max="99999999.99" inputmode="decimal"
                                                 class="form-control <?= isset($erros[$id]) ? 'is-invalid' : '' ?>"
                                                 name="limite[<?= $id ?>]" placeholder="Sem limite"
                                                 value="<?= htmlspecialchars((string) $digitado) ?>">
