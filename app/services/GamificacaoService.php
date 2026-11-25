@@ -162,40 +162,40 @@ class GamificacaoService
     }
 
     public function verificarEAtualizarStreak(int $usuarioId): void
-{
-    $usuarioComum = $this->repository->getPorUsuarioId($usuarioId);
+    {
+        $usuarioComum = $this->repository->getPorUsuarioId($usuarioId);
 
-    if (!$usuarioComum) {
-        return;
-    }
+        if (!$usuarioComum) {
+            return;
+        }
 
-    $hoje = (new DateTimeImmutable())->format('Y-m-d');
-    $ontem = (new DateTimeImmutable('-1 day'))->format('Y-m-d');
+        $hoje = (new DateTimeImmutable())->format('Y-m-d');
+        $ontem = (new DateTimeImmutable('-1 day'))->format('Y-m-d');
 
-    if ($usuarioComum->getUltimoAcesso() === $hoje) {
-        return; // já processado hoje
-    }
+        if ($usuarioComum->getUltimoAcesso() === $hoje) {
+            return; // já processado hoje
+        }
 
-    if ($usuarioComum->getUltimoAcesso() === $ontem) {
-        $usuarioComum->setStreakAtual($usuarioComum->getStreakAtual() + 1);
-    } else {
-        $usuarioComum->setStreakAtual(1); // quebrou a sequência, recomeça
-    }
+        if ($usuarioComum->getUltimoAcesso() === $ontem) {
+            $usuarioComum->setStreakAtual($usuarioComum->getStreakAtual() + 1);
+        } else {
+            $usuarioComum->setStreakAtual(1); // quebrou a sequência, recomeça
+        }
 
-    if ($usuarioComum->getStreakAtual() > $usuarioComum->getMaiorStreak()) {
-        $usuarioComum->setMaiorStreak($usuarioComum->getStreakAtual());
-    }
+        if ($usuarioComum->getStreakAtual() > $usuarioComum->getMaiorStreak()) {
+            $usuarioComum->setMaiorStreak($usuarioComum->getStreakAtual());
+        }
 
-    $usuarioComum->setUltimoAcesso($hoje);
-    $this->repository->atualizarStreak($usuarioComum);
+        $usuarioComum->setUltimoAcesso($hoje);
+        $this->repository->atualizarStreak($usuarioComum);
 
-    $this->concederXp($usuarioId, 'acesso_diario'); // Quadro 5: 5 XP, uma vez por dia
+        $this->concederXp($usuarioId, 'acesso_diario'); // Quadro 5: 5 XP, uma vez por dia
 
-    // Quadro 5: marco de sequência, XP único por marco alcançado
-    foreach (self::MARCOS_STREAK as $dias => $acao) {
-        if ($usuarioComum->getStreakAtual() >= $dias) {
-            $this->concederXp($usuarioId, $acao);
+        // Quadro 5: marco de sequência, XP único por marco alcançado
+        foreach (self::MARCOS_STREAK as $dias => $acao) {
+            if ($usuarioComum->getStreakAtual() >= $dias) {
+                $this->concederXp($usuarioId, $acao);
+            }
         }
     }
-}
 }
