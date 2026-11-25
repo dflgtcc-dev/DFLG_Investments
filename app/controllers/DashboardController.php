@@ -6,18 +6,21 @@ use app\core\Controller;
 use app\services\DashboardService;
 use app\services\GamificacaoService;
 use app\services\LimiteCategoriaService;
+use app\services\ParcelamentoService;
 
 class DashboardController extends Controller
 {
     private DashboardService $dashboardService;
     private GamificacaoService $gamificacaoService;
     private LimiteCategoriaService $limiteCategoriaService;
+    private ParcelamentoService $parcelamentoService;
 
     public function __construct()
     {
         $this->dashboardService = new DashboardService();
         $this->gamificacaoService = new GamificacaoService();
         $this->limiteCategoriaService = new LimiteCategoriaService();
+        $this->parcelamentoService = new ParcelamentoService();
     }
 
     public function index()
@@ -44,6 +47,11 @@ class DashboardController extends Controller
         // RN 12: o aviso de limite excedido é do mês atual, então só aparece quando o usuário está nele
         $data['categoriasExcedidas'] = $data['painel']['ehMesAtual']
             ? $this->limiteCategoriaService->getCategoriasExcedidas($usuario->getId())
+            : [];
+
+        // lembrete de parcelas perto de vencer: também é do mês atual
+        $data['lembretesParcelas'] = $data['painel']['ehMesAtual']
+            ? $this->parcelamentoService->getLembretesParcelas($usuario->getId())
             : [];
 
         $this->view('dashboard/dashboard', $data);
