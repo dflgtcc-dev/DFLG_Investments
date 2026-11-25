@@ -4,6 +4,7 @@ namespace app\services;
 
 use app\models\Transacao;
 use app\repositories\TransacaoRepository;
+use DateTimeImmutable;
 
 class TransacaoService
 {
@@ -23,6 +24,10 @@ class TransacaoService
     }
 
     public const MAX_BUSCA = 100;
+    public const MAX_DESCRICAO = 255;
+    public const MAX_VALOR = 99999999.99;
+    public const DATA_MINIMA = '2000-01-01';
+    public const DATA_MAXIMA = '2099-12-31';
 
     // lê os filtros da URL (texto de fora, nunca confiável): o que for inválido é descartado e vira um aviso
     // devolve ['filtros' => [...], 'erros' => [...]]
@@ -219,8 +224,17 @@ class TransacaoService
     {
         $this->erros = [];
 
-        if ($transacao->getValor() <= 0) {
+        $valor = round($transacao->getValor(), 2);
+
+        if (!is_finite($valor) || $valor > self::MAX_VALOR) {
+            $this->erros['valor'] = "O valor não pode passar de R$ 99.999.999,99";
+        } elseif ($valor <= 0) {
+            // arredondado antes de comparar: 0,004 passaria em "maior que zero" e seria gravado como 0,00
             $this->erros['valor'] = "O valor deve ser maior que zero";
+        }
+
+        if ($transacao->getDescricao() !== null && mb_strlen($transacao->getDescricao()) > self::MAX_DESCRICAO) {
+            $this->erros['descricao'] = "A descrição pode ter no máximo " . self::MAX_DESCRICAO . " caracteres";
         }
 
         if (!in_array($transacao->getTipo(), ['receita', 'despesa'])) {
@@ -238,8 +252,16 @@ class TransacaoService
             $this->erros['categoriaId'] = "Essa categoria é de {$categoria->getTipo()}, não de {$transacao->getTipo()}";
         }
 
-        if (!$transacao->getDataRegistro()) {
+        $data = $transacao->getDataRegistro();
+        $dataValida = $data !== '' ? DateTimeImmutable::createFromFormat('!Y-m-d', $data) : false;
+
+        if ($data === '') {
             $this->erros['dataRegistro'] = "Informe a data do registro";
+        } elseif (!$dataValida || $dataValida->format('Y-m-d') !== $data) {
+            // recusa datas como 2026-02-30, que o PHP transformaria em 02/03
+            $this->erros['dataRegistro'] = "Informe uma data válida";
+        } elseif ($data < self::DATA_MINIMA || $data > self::DATA_MAXIMA) {
+            $this->erros['dataRegistro'] = "A data deve estar entre 01/01/2000 e 31/12/2099";
         }
 
         return empty($this->erros);
