@@ -43,7 +43,7 @@
 
                         <div class="col-md-8">
                             <label for="nomeMeta" class="form-label">Nome da meta</label>
-                            <input type="text" class="form-control" id="nomeMeta" name="nomeMeta"
+                            <input type="text" class="form-control" id="nomeMeta" name="nomeMeta" maxlength="100"
                                 value="<?= htmlspecialchars($meta['nomeMeta'] ?? '') ?>">
                             <?php if (isset($erros['nomeMeta'])): ?>
                                 <div class="text-danger small"><?= $erros['nomeMeta'] ?></div>
@@ -57,11 +57,14 @@
                                 <option value="comprar" <?= (isset($meta['tipoMeta']) && $meta['tipoMeta'] == 'comprar') ? 'selected' : '' ?>>Comprar algo</option>
                                 <option value="investir" <?= (isset($meta['tipoMeta']) && $meta['tipoMeta'] == 'investir') ? 'selected' : '' ?>>Investir</option>
                             </select>
+                            <?php if (isset($erros['tipoMeta'])): ?>
+                                <div class="text-danger small"><?= $erros['tipoMeta'] ?></div>
+                            <?php endif; ?>
                         </div>
 
                         <div class="col-md-4">
                             <label for="valorAlvo" class="form-label">Valor alvo (R$)</label>
-                            <input type="number" step="0.01" min="0.01" class="form-control" id="valorAlvo" name="valorAlvo"
+                            <input type="number" step="0.01" min="0.01" max="99999999.99" class="form-control" id="valorAlvo" name="valorAlvo"
                                 value="<?= htmlspecialchars($meta['valorAlvo'] ?? '') ?>">
                             <?php if (isset($erros['valorAlvo'])): ?>
                                 <div class="text-danger small"><?= $erros['valorAlvo'] ?></div>
@@ -70,7 +73,7 @@
 
                         <div class="col-md-4">
                             <label for="valorAtual" class="form-label">Valor já guardado (R$)</label>
-                            <input type="number" step="0.01" min="0" class="form-control" id="valorAtual" name="valorAtual"
+                            <input type="number" step="0.01" min="0" max="99999999.99" class="form-control" id="valorAtual" name="valorAtual"
                                 value="<?= htmlspecialchars($meta['valorAtual'] ?? '0') ?>">
                             <?php if (isset($erros['valorAtual'])): ?>
                                 <div class="text-danger small"><?= $erros['valorAtual'] ?></div>
@@ -79,7 +82,7 @@
 
                         <div class="col-md-4">
                             <label for="dataLimite" class="form-label">Data limite</label>
-                            <input type="date" class="form-control" id="dataLimite" name="dataLimite"
+                            <input type="date" max="2099-12-31" class="form-control" id="dataLimite" name="dataLimite"
                                 value="<?= htmlspecialchars($meta['dataLimite'] ?? '') ?>">
                             <?php if (isset($erros['dataLimite'])): ?>
                                 <div class="text-danger small"><?= $erros['dataLimite'] ?></div>
