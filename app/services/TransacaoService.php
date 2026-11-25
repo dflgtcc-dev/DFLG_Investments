@@ -93,8 +93,7 @@ class TransacaoService
         }
 
         $busca = mb_substr($texto('busca'), 0, self::MAX_BUSCA);
-        // a descrição é gravada com os caracteres especiais escapados, então a busca passa pelo mesmo tratamento
-        $filtros['busca'] = $busca !== '' ? filter_var($busca, FILTER_SANITIZE_SPECIAL_CHARS) : null;
+        $filtros['busca'] = $busca !== '' ? $busca : null;
 
         return ['filtros' => $filtros, 'erros' => $erros];
     }
