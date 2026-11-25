@@ -45,7 +45,7 @@
 
                         <div class="col-md-8">
                             <label for="nomeMeta" class="form-label">Nome da meta</label>
-                            <input type="text" class="form-control" id="nomeMeta" name="nomeMeta"
+                            <input type="text" class="form-control" id="nomeMeta" name="nomeMeta" maxlength="100"
                                 value="<?= htmlspecialchars($meta->getNomeMeta()) ?>">
                             <?php if (isset($erros['nomeMeta'])): ?>
                                 <div class="text-danger small"><?= $erros['nomeMeta'] ?></div>
@@ -59,11 +59,14 @@
                                 <option value="comprar" <?= $meta->getTipoMeta() == 'comprar' ? 'selected' : '' ?>>Comprar algo</option>
                                 <option value="investir" <?= $meta->getTipoMeta() == 'investir' ? 'selected' : '' ?>>Investir</option>
                             </select>
+                            <?php if (isset($erros['tipoMeta'])): ?>
+                                <div class="text-danger small"><?= $erros['tipoMeta'] ?></div>
+                            <?php endif; ?>
                         </div>
 
                         <div class="col-md-6">
                             <label for="valorAlvo" class="form-label">Valor alvo (R$)</label>
-                            <input type="number" step="0.01" min="<?= max(0.01, round($meta->getValorAtual(), 2)) ?>" class="form-control" id="valorAlvo" name="valorAlvo"
+                            <input type="number" step="0.01" min="<?= max(0.01, round($meta->getValorAtual(), 2)) ?>" max="99999999.99" class="form-control" id="valorAlvo" name="valorAlvo"
                                 value="<?= $meta->getValorAlvo() ?>">
                             <?php if (isset($erros['valorAlvo'])): ?>
                                 <div class="text-danger small"><?= $erros['valorAlvo'] ?></div>
@@ -75,7 +78,7 @@
 
                         <div class="col-md-6">
                             <label for="dataLimite" class="form-label">Data limite</label>
-                            <input type="date" class="form-control" id="dataLimite" name="dataLimite"
+                            <input type="date" max="2099-12-31" class="form-control" id="dataLimite" name="dataLimite"
                                 value="<?= htmlspecialchars($meta->getDataLimite()) ?>">
                             <?php if (isset($erros['dataLimite'])): ?>
                                 <div class="text-danger small"><?= $erros['dataLimite'] ?></div>
