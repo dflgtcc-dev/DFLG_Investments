@@ -7,6 +7,7 @@ use app\helpers\Validador;
 use app\models\Transacao;
 use app\services\CategoriaService;
 use app\services\LimiteCategoriaService;
+use app\services\ParcelamentoService;
 use app\services\TransacaoService;
 
 class TransacaoController extends Controller
@@ -14,12 +15,14 @@ class TransacaoController extends Controller
     private TransacaoService $service;
     private CategoriaService $categoriaService;
     private LimiteCategoriaService $limiteCategoriaService;
+    private ParcelamentoService $parcelamentoService;
 
     public function __construct()
     {
         $this->service = new TransacaoService();
         $this->categoriaService = new CategoriaService();
         $this->limiteCategoriaService = new LimiteCategoriaService();
+        $this->parcelamentoService = new ParcelamentoService();
     }
 
     public function listarTodas()
@@ -41,6 +44,7 @@ class TransacaoController extends Controller
         $data['totalDespesas'] = $this->service->getTotalDespesas($usuarioId);
         $data['saldo'] = $this->service->getSaldo($usuarioId);
         $data['categoriasExcedidas'] = $this->limiteCategoriaService->getCategoriasExcedidas($usuarioId);
+        $data['lembretesParcelas'] = $this->parcelamentoService->getLembretesParcelas($usuarioId);
 
         $this->view('transacoes/transacoes_list', $data);
     }
