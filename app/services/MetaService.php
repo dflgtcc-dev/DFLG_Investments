@@ -8,6 +8,10 @@ use DateTimeImmutable;
 
 class MetaService
 {
+    public const MAX_NOME = 100;
+    public const MAX_VALOR = 99999999.99;
+    public const TIPOS = ['economizar', 'comprar', 'investir'];
+
     private MetaRepository $repository;
     private TransacaoService $transacaoService;
     private CategoriaService $categoriaService;
@@ -195,11 +199,28 @@ class MetaService
     {
         $this->erros = [];
 
-        if ($meta->getValorAlvo() <= 0) {
+        if (mb_strlen($meta->getNomeMeta()) > self::MAX_NOME) {
+            $this->erros['nomeMeta'] = "O nome da meta pode ter no máximo " . self::MAX_NOME . " caracteres";
+        }
+
+        if (!in_array($meta->getTipoMeta(), self::TIPOS, true)) {
+            $this->erros['tipoMeta'] = "Selecione um tipo de meta válido";
+        }
+
+        $valorAlvo = round($meta->getValorAlvo(), 2);
+
+        if (!is_finite($valorAlvo) || $valorAlvo > self::MAX_VALOR) {
+            $this->erros['valorAlvo'] = "O valor alvo não pode passar de R$ 99.999.999,99";
+        } elseif ($valorAlvo <= 0) {
+            // arredondado antes de comparar: 0,004 passaria em "maior que zero" e seria gravado como 0,00
             $this->erros['valorAlvo'] = "O valor alvo deve ser maior que zero";
         }
 
-        if ($meta->getValorAtual() < 0) {
+        $valorAtual = round($meta->getValorAtual(), 2);
+
+        if (!is_finite($valorAtual) || $valorAtual > self::MAX_VALOR) {
+            $this->erros['valorAtual'] = "O valor já guardado não pode passar de R$ 99.999.999,99";
+        } elseif ($valorAtual < 0) {
             $this->erros['valorAtual'] = "O valor atual não pode ser negativo";
         }
 
@@ -216,12 +237,15 @@ class MetaService
         }
 
         $hoje = new DateTimeImmutable('today');
-        $dataLimite = DateTimeImmutable::createFromFormat('Y-m-d', $meta->getDataLimite());
+        $dataLimite = DateTimeImmutable::createFromFormat('!Y-m-d', $meta->getDataLimite());
 
-        if (!$dataLimite) {
+        if (!$dataLimite || $dataLimite->format('Y-m-d') !== $meta->getDataLimite()) {
+            // recusa datas como 2030-02-30, que o PHP transformaria em 02/03
             $this->erros['dataLimite'] = "Informe uma data limite válida";
         } elseif ($dataLimite->setTime(0, 0) <= $hoje) {
             $this->erros['dataLimite'] = "A data limite deve ser posterior à data de hoje";
+        } elseif ($meta->getDataLimite() > TransacaoService::DATA_MAXIMA) {
+            $this->erros['dataLimite'] = "A data limite não pode passar de 31/12/2099";
         }
 
         return empty($this->erros);
