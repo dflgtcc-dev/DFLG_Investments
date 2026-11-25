@@ -160,6 +160,7 @@ Mostra a situação financeira de **um mês** (o atual ou outro dentro do histó
 - **Desfazer:** remove a última parcela lançada.
 - Não é possível reduzir a quantidade de parcelas para menos do que já foi paga.
 - Ao excluir o parcelamento, as parcelas já lançadas permanecem como despesas comuns.
+- **Lembrete de vencimento:** um aviso no topo do dashboard, de Minhas Finanças e de Parcelamentos mostra as parcelas que vencem nos próximos **3 dias** ou que já venceram e ainda não foram lançadas. O aviso tem um **X** para fechar (volta no dia seguinte, ou se outra parcela entrar na janela) e some sozinho quando a parcela é lançada.
 
 ### Categorias e limites de gastos
 
@@ -167,6 +168,7 @@ Mostra a situação financeira de **um mês** (o atual ou outro dentro do histó
 - O sistema compara o limite com o gasto do mês e **avisa quando a categoria passa do limite**. Gastar exatamente o valor do limite não conta como excesso.
 - Se algum valor do formulário for inválido, **nada é gravado**.
 - Os limites também aparecem no dashboard.
+- O aviso de limite excedido tem um **X** para fechar. Ele não volta no mesmo mês, a menos que outra categoria ultrapasse o limite.
 
 ### Relatórios (extratos)
 
