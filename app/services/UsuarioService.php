@@ -12,6 +12,7 @@ use DateTimeImmutable;
 class UsuarioService
 {
     private const IDADE_MINIMA = 16;
+    private const NASCIMENTO_MINIMO = '1900-01-01';
     private const LIMITE_NOME = 100;
     private const LIMITE_NICKNAME = 25;
     private const LIMITE_EMAIL = 100;
@@ -214,12 +215,15 @@ class UsuarioService
         }
 
         if ($nascimentoMudou) {
-            $nascimento = DateTimeImmutable::createFromFormat('Y-m-d', $usuario->getDataNascimento());
+            $nascimento = DateTimeImmutable::createFromFormat('!Y-m-d', $usuario->getDataNascimento());
 
-            if (!$nascimento) {
+            // recusa datas como 1990-02-30, que o PHP transformaria em 02/03
+            if (!$nascimento || $nascimento->format('Y-m-d') !== $usuario->getDataNascimento()) {
                 $this->erros['dataNascimento'] = "Informe uma data de nascimento válida";
             } elseif ($nascimento > new DateTimeImmutable('today')) {
                 $this->erros['dataNascimento'] = "A data de nascimento não pode ser no futuro";
+            } elseif ($usuario->getDataNascimento() < self::NASCIMENTO_MINIMO) {
+                $this->erros['dataNascimento'] = "A data de nascimento não pode ser anterior a 01/01/1900";
             } elseif ($nascimento->diff(new DateTimeImmutable('today'))->y < self::IDADE_MINIMA) {
                 $this->erros['dataNascimento'] = "É preciso ter pelo menos " . self::IDADE_MINIMA . " anos";
             }
