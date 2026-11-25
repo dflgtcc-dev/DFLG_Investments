@@ -115,7 +115,7 @@
             $chips[] = ['Valor até ' . $moeda($filtros['valorMax']), ['valorMax']];
         }
         if ($filtros['busca']) {
-            $chips[] = ['Busca: "' . html_entity_decode($filtros['busca'], ENT_QUOTES) . '"', ['busca']];
+            $chips[] = ['Busca: "' . $filtros['busca'] . '"', ['busca']];
         }
         $ordemRotulos = ['antigas' => 'Mais antigas', 'maior' => 'Maior valor', 'menor' => 'Menor valor'];
         if ($filtros['ordem']) {
@@ -230,7 +230,7 @@
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-search"></i></span>
                                 <input type="text" class="form-control" id="busca" name="busca" maxlength="100" placeholder="Ex.: mercado, aluguel, salário"
-                                    value="<?= htmlspecialchars(html_entity_decode((string) $filtros['busca'], ENT_QUOTES)) ?>">
+                                    value="<?= htmlspecialchars((string) $filtros['busca']) ?>">
                             </div>
                         </div>
                         <div class="col-md-3 d-flex gap-2 align-items-end">
