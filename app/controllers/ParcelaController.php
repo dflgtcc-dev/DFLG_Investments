@@ -51,8 +51,8 @@ class ParcelaController extends Controller
         $data = [];
         $validador = new Validador();
 
-        $descricao = $this->textoPost('descricao');
-        $tag = $this->textoPost('tag');
+        $descricao = $this->escalarPost('descricao');
+        $tag = $this->escalarPost('tag');
         $valorParcela = $this->escalarPost('valorParcela');
         $quantidadeParcelas = $this->escalarPost('quantidadeParcelas');
         $dataPrimeiraParcela = $this->escalarPost('dataPrimeiraParcela');
@@ -131,8 +131,8 @@ class ParcelaController extends Controller
         $validador = new Validador();
 
         $id = (int) $this->escalarPost('id');
-        $descricao = $this->textoPost('descricao');
-        $tag = $this->textoPost('tag');
+        $descricao = $this->escalarPost('descricao');
+        $tag = $this->escalarPost('tag');
         $valorParcela = $this->escalarPost('valorParcela');
         $quantidadeParcelas = $this->escalarPost('quantidadeParcelas');
         $categoriaId = $this->escalarPost('categoriaId');
@@ -216,7 +216,7 @@ class ParcelaController extends Controller
 
         if ($this->service->lancarParcela($id, $this->getUsuarioLogadoId())) {
             $this->avisar('success', "Parcela {$numero}/{$parcelamento->getQuantidadeParcelas()} de \"" .
-                html_entity_decode($parcelamento->getDescricao(), ENT_QUOTES) . "\" lançada.");
+                $parcelamento->getDescricao() . "\" lançada.");
         } else {
             $this->avisar('danger', $this->primeiroErro());
         }
@@ -247,12 +247,6 @@ class ParcelaController extends Controller
         $valor = $_POST[$campo] ?? '';
 
         return is_string($valor) ? trim($valor) : '';
-    }
-
-    private function textoPost(string $campo): string
-    {
-        // mesmo tratamento do resto do sistema: o texto é gravado já escapado
-        return filter_var($this->escalarPost($campo), FILTER_SANITIZE_SPECIAL_CHARS);
     }
 
     // o campo é type="number" (manda ponto), mas aceita vírgula se vier digitado de outro jeito

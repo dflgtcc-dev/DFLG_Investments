@@ -66,7 +66,7 @@ class TransacaoController extends Controller
         $valor = $_POST['valor'] ?? '';
         $categoriaId = $_POST['categoriaId'] ?? '';
         $dataRegistro = $_POST['dataRegistro'] ?? '';
-        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
+        $descricao = $this->texto('descricao');
 
         $validador->obrigatorio('valor', $valor);
         $validador->obrigatorio('categoriaId', $categoriaId);
@@ -140,7 +140,7 @@ class TransacaoController extends Controller
         $valor = $_POST['valor'] ?? '';
         $categoriaId = $_POST['categoriaId'] ?? '';
         $dataRegistro = $_POST['dataRegistro'] ?? '';
-        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
+        $descricao = $this->texto('descricao');
 
         $validador->obrigatorio('valor', $valor);
         $validador->obrigatorio('categoriaId', $categoriaId);
@@ -188,5 +188,13 @@ class TransacaoController extends Controller
         }
 
         $this->redirect(URL_BASE . '/transacoes');
+    }
+
+    // aceita só texto simples (um array no POST, como descricao[]=x, vira vazio); o escape fica por conta das views
+    private function texto(string $campo): string
+    {
+        $valor = $_POST[$campo] ?? '';
+
+        return is_string($valor) ? trim($valor) : '';
     }
 }

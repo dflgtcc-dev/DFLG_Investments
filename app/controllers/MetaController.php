@@ -40,7 +40,7 @@ class MetaController extends Controller
         $data = [];
         $validador = new Validador();
 
-        $nomeMeta = filter_input(INPUT_POST, 'nomeMeta', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nomeMeta = $this->texto('nomeMeta');
         $tipoMeta = $_POST['tipoMeta'] ?? 'economizar';
         $valorAlvo = $_POST['valorAlvo'] ?? '';
         $valorAtual = $_POST['valorAtual'] ?? 0;
@@ -109,7 +109,7 @@ class MetaController extends Controller
         $validador = new Validador();
 
         $id = $_POST['id'] ?? 0;
-        $nomeMeta = filter_input(INPUT_POST, 'nomeMeta', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nomeMeta = $this->texto('nomeMeta');
         $tipoMeta = $_POST['tipoMeta'] ?? 'economizar';
         $valorAlvo = $_POST['valorAlvo'] ?? '';
         $dataLimite = $_POST['dataLimite'] ?? '';
@@ -266,5 +266,13 @@ class MetaController extends Controller
         $data['erros'] = $validador->temErros() ? $validador->getErros() : $this->service->getErros();
 
         $this->view('metas/metas_resgatar', $data);
+    }
+
+    // aceita só texto simples (um array no POST, como descricao[]=x, vira vazio); o escape fica por conta das views
+    private function texto(string $campo): string
+    {
+        $valor = $_POST[$campo] ?? '';
+
+        return is_string($valor) ? trim($valor) : '';
     }
 }
