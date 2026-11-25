@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use DateTimeImmutable;
-
 class Usuario
 {
     private int $id;
@@ -17,7 +15,6 @@ class Usuario
     private string $perfil;
     private string $tema = 'claro';
     private ?string $telefone;
-    private DateTimeImmutable $criadoEm;
 
     public function __construct(
         int $id,
@@ -43,7 +40,6 @@ class Usuario
         $this->foto = $foto;
         $this->tema = $tema;
         $this->telefone = $telefone;
-        $this->criadoEm = new DateTimeImmutable();
     }
 
     public function getId(): int
@@ -126,11 +122,6 @@ class Usuario
     public function eAdmin(): bool
     {
         return $this->perfil === 'administrador';
-    }
-
-    public function getCriadoEm(): DateTimeImmutable
-    {
-        return $this->criadoEm;
     }
 
     public static function arrayParaObjeto(array $usuario): self
