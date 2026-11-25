@@ -48,7 +48,7 @@ $parcelas = $painel['parcelas'];
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <!-- CSS próprio -->
-    <link href="<?= URL_BASE ?>/assets/css/style.css?v=<?= filemtime(__DIR__ . '/../../../public/assets/css/style.css') ?>" rel="stylesheet">
+    <link href="<?= URL_BASE ?>/assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -144,7 +144,7 @@ $parcelas = $painel['parcelas'];
                                 aria-valuenow="<?= $progressoNivel['percentual'] ?>" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-bar" style="width: <?= $progressoNivel['percentual'] ?>%"></div>
                             </div>
-                            <div class="small mt-2 dash-xp-texto">
+                            <div class="small mt-2 dash-nivel-texto">
                                 <?= $progressoNivel['xpNoNivel'] ?> / <?= $progressoNivel['xpParaProximo'] ?> XP para o nível <?= $gamificacao->getNivel() + 1 ?>
                             </div>
                         </div>
