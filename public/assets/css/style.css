@@ -350,7 +350,8 @@ a.dash-mes-botao:hover {
    Bootstrap: sm >= 576px, md >= 768px, lg >= 992px
    ========================================================================== */
 
-/* Dashboard: o topo é sempre escuro (no tema claro o texto branco sumia no fundo claro) */
+/* Dashboard: o cartão do topo é pensado para fundo escuro (texto branco).
+   No tema claro ele vira branco e as cores de texto, botões e indicadores são trocadas abaixo. */
 .dash-hero {
     color: #ffffff;
     background: #111317;
@@ -358,6 +359,89 @@ a.dash-mes-botao:hover {
 
 [data-bs-theme="dark"] .dash-hero {
     background: rgba(255, 255, 255, 0.05);
+}
+
+/* texto de progresso de XP (antes era um style inline no dashboard.php) */
+.dash-xp-texto {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* ----- Tema claro: cartão do topo branco ----- */
+html[data-bs-theme="light"] .dash-hero {
+    color: #212529;
+    background: #ffffff;
+    border: 1px solid var(--bs-border-color);
+}
+
+html[data-bs-theme="light"] .dash-hero .dash-sub,
+html[data-bs-theme="light"] .dash-hero .dash-rotulo,
+html[data-bs-theme="light"] .dash-hero .dash-kpi-rotulo,
+html[data-bs-theme="light"] .dash-hero .dash-xp-texto {
+    color: rgba(33, 37, 41, 0.7);
+}
+
+html[data-bs-theme="light"] .dash-hero .dash-comparacao {
+    color: rgba(33, 37, 41, 0.6);
+}
+
+/* o verde e o vermelho do tema escuro não têm contraste no branco: versões mais escuras */
+html[data-bs-theme="light"] .dash-hero .dash-saldo-pos,
+html[data-bs-theme="light"] .dash-hero .dash-var-boa {
+    color: #078a43;
+}
+
+html[data-bs-theme="light"] .dash-hero .dash-saldo-neg,
+html[data-bs-theme="light"] .dash-hero .dash-var-ruim {
+    color: #c62828;
+}
+
+html[data-bs-theme="light"] .dash-hero .dash-var-boa {
+    background: rgba(7, 138, 67, 0.12);
+}
+
+html[data-bs-theme="light"] .dash-hero .dash-var-ruim {
+    background: rgba(198, 40, 40, 0.1);
+}
+
+html[data-bs-theme="light"] .dash-hero .dash-var-neutra {
+    color: rgba(33, 37, 41, 0.7);
+    background: rgba(0, 0, 0, 0.06);
+}
+
+html[data-bs-theme="light"] .dash-hero .dash-kpi,
+html[data-bs-theme="light"] .dash-hero .dash-nivel {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+html[data-bs-theme="light"] .dash-hero .dash-mes {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+html[data-bs-theme="light"] .dash-hero .dash-mes-botao {
+    color: #212529;
+    background: rgba(0, 0, 0, 0.07);
+}
+
+html[data-bs-theme="light"] .dash-hero a.dash-mes-botao:hover {
+    color: #000000;
+    background: var(--dflg-verde);
+}
+
+html[data-bs-theme="light"] .dash-hero .dash-xp {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* os botões "outline-light" (Voltar para hoje, Ver extrato do mês) são brancos: no fundo branco somem */
+html[data-bs-theme="light"] .dash-hero .btn-outline-light {
+    --bs-btn-color: #212529;
+    --bs-btn-border-color: rgba(33, 37, 41, 0.35);
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #212529;
+    --bs-btn-hover-border-color: #212529;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #212529;
+    --bs-btn-active-border-color: #212529;
 }
 
 /* Link da página atual no menu */
