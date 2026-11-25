@@ -3,6 +3,7 @@
  * Variáveis disponibilizadas pelo controller (via Controller::view/extract).
  * @var array|null $aviso
  * @var mixed $categoriasExcedidas
+ * @var mixed $lembretesParcelas
  * @var mixed $lista
  */
 ?>
@@ -29,6 +30,7 @@
     <div class="container pb-5">
 
         <?php require __DIR__ . '/../partials/alerta_limites.php'; ?>
+        <?php require __DIR__ . '/../partials/alerta_parcelas.php'; ?>
 
         <?php if (!empty($aviso)): ?>
             <div class="alert alert-<?= htmlspecialchars($aviso['tipo']) ?>" role="alert">
