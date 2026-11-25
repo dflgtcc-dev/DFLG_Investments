@@ -55,7 +55,7 @@
 
                         <div class="col-md-4">
                             <label for="valor" class="form-label">Valor (R$)</label>
-                            <input type="number" step="0.01" min="0.01" class="form-control" id="valor" name="valor"
+                            <input type="number" step="0.01" min="0.01" max="99999999.99" class="form-control" id="valor" name="valor"
                                 value="<?= htmlspecialchars($transacao['valor'] ?? '') ?>">
                             <?php if (isset($erros['valor'])): ?>
                                 <div class="text-danger small"><?= $erros['valor'] ?></div>
@@ -65,7 +65,7 @@
 
                         <div class="col-md-4">
                             <label for="dataRegistro" class="form-label">Data</label>
-                            <input type="date" class="form-control" id="dataRegistro" name="dataRegistro"
+                            <input type="date" min="2000-01-01" max="2099-12-31" class="form-control" id="dataRegistro" name="dataRegistro"
                                 value="<?= htmlspecialchars($transacao['dataRegistro'] ?? date('Y-m-d')) ?>">
                             <?php if (isset($erros['dataRegistro'])): ?>
                                 <div class="text-danger small"><?= $erros['dataRegistro'] ?></div>
@@ -90,8 +90,11 @@
 
                         <div class="col-md-6">
                             <label for="descricao" class="form-label">Descrição</label>
-                            <input type="text" class="form-control" id="descricao" name="descricao"
+                            <input type="text" class="form-control" id="descricao" name="descricao" maxlength="255"
                                 value="<?= htmlspecialchars($transacao['descricao'] ?? '') ?>">
+                            <?php if (isset($erros['descricao'])): ?>
+                                <div class="text-danger small"><?= $erros['descricao'] ?></div>
+                            <?php endif; ?>
                         </div>
 
                     </div>
