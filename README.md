@@ -262,7 +262,7 @@ O administrador altera a própria senha e os próprios dados pela tela de **Perf
 
 ### Requisitos
 
-- PHP **8.2** ou superior, com as extensões `pdo` e `pdo_mysql`
+- PHP **8.2** ou superior, com as extensões `pdo`, `pdo_mysql` e `mbstring`
 - MySQL (ou MariaDB)
 - Apache com `mod_rewrite` (recomendado), ou o servidor embutido do PHP para testes
 
@@ -275,14 +275,15 @@ git clone <URL-DO-REPOSITORIO>
 cd DFLG_Investments
 ```
 
-**2. Crie o banco e importe as tabelas**
+**2. Crie o banco de dados (vazio)**
 
 ```bash
 mysql -u root -p -e "CREATE DATABASE dflg CHARACTER SET utf8mb4;"
-mysql -u root -p dflg < app/database/scripts/script.sql
 ```
 
-O script cria as tabelas, as categorias padrão e a conta do administrador chefe (`admin@dflg.com`).
+No primeiro acesso, o `DatabaseInitializer` percebe que o banco está vazio e cria sozinho as tabelas, as categorias padrão e a conta do administrador chefe (`admin@dflg.com`). Se preferir, é possível importar o esquema à mão (por exemplo, no phpMyAdmin): `mysql -u root -p dflg < app/database/scripts/script.sql`.
+
+Em bancos que já existem, as atualizações de estrutura entre versões também são aplicadas automaticamente.
 
 **3. Informe a conexão com o banco**
 
