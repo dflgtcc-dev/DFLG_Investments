@@ -1,5 +1,8 @@
--- O banco (DB_NAME, em Config.php) é criado e selecionado pelo DatabaseInitializer; em hospedeiro,
--- crie o banco no painel e importe este arquivo no phpMyAdmin com ele selecionado.
+-- Esquema do banco do DFLG Investments.
+-- Em bancos novos, o DatabaseInitializer executa este arquivo sozinho na primeira conexão (quando a tabela
+-- usuarios ainda não existe), então basta criar o banco vazio. Também dá para importá-lo à mão, por exemplo
+-- no phpMyAdmin, com o banco já selecionado.
+-- Ao acrescentar uma coluna ou tabela, registre também uma migração no DatabaseInitializer (bancos que já existem).
 
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -132,5 +135,3 @@ INSERT IGNORE INTO categorias (nome, icone, tipo) VALUES
 ('Outras despesas', 'bi-dash-circle', 'despesa'),
 ('Metas', 'bi-bullseye', 'despesa'),
 ('Resgate de metas', 'bi-box-arrow-in-down', 'receita');
-
-
