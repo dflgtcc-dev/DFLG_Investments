@@ -3,59 +3,81 @@
 namespace app\database;
 
 use PDO;
+use RuntimeException;
+use Throwable;
 
+/**
+ * Mantém o banco de dados em dia com o código.
+ *
+ * O ConnectionFactory chama migrate() a cada conexão. Tudo aqui é idempotente: cada passo confere
+ * o que já existe e só altera o que falta, então rodar de novo em um banco atualizado não muda nada.
+ *
+ *  1. Banco vazio (sem a tabela usuarios): cria tudo a partir de scripts/script.sql.
+ *  2. Banco de uma versão anterior: as migrações abaixo acrescentam o que foi criado depois.
+ *
+ * Ao incluir uma coluna ou tabela nova, faça nos dois lugares:
+ *  - scripts/script.sql, para os bancos novos;
+ *  - um método migrarXxx() aqui, registrado em MIGRACOES, para os bancos que já existem.
+ */
 class DatabaseInitializer
 {
+    private const SCRIPT = __DIR__ . '/scripts/script.sql';
 
-    public function init(PDO $connection)
+    // a ordem importa: uma migração pode depender das anteriores
+    private const MIGRACOES = [
+        'migrarUltimoAcesso',
+        'migrarColunasParcelamento',
+        'migrarColunaTema',
+        'migrarColunaTelefone',
+        'migrarNivelPermissao',
+        'migrarAporteMeta',
+        'migrarLimiteCategoria',
+    ];
+
+    public function migrate(PDO $connection): void
     {
-        $connection->exec("CREATE DATABASE IF NOT EXISTS " . DB_NAME);
-        $connection->exec("USE " . DB_NAME);
+        $this->instalarSeBancoVazio($connection);
 
-        $scriptPath = __DIR__ . '/scripts/script.sql';
-
-        if (file_exists($scriptPath)) {
-            $sql = file_get_contents($scriptPath);
-
+        foreach (self::MIGRACOES as $migracao) {
             try {
-                $connection->exec($sql);
-                $this->migrarColunasAntigas($connection);
-                $this->migrarColunasParcelamento($connection);
-                $this->migrarColunaTema($connection);
-                $this->migrarAporteMeta($connection);
-                $this->migrarLimiteCategoria($connection);
-            } catch (\Exception $e) {
-                error_log("Erro ao inicializar banco de dados: " . $e->getMessage());
+                $this->$migracao($connection);
+            } catch (Throwable $e) {
+                // o detalhe técnico vai só para o log (RNF 04); quem chamou decide o que mostrar
+                error_log("Falha na migração {$migracao}: " . $e->getMessage());
+
+                throw $e;
             }
         }
     }
 
-    public function migrate(PDO $connection): void
+    // banco recém-criado e ainda sem tabelas: monta o esquema completo. Só roda quando a tabela usuarios
+    // não existe, porque o script traz dados iniciais (administrador e categorias) que não devem se repetir.
+    private function instalarSeBancoVazio(PDO $connection): void
     {
-        $this->migrarColunasAntigas($connection);
-        $this->migrarColunasParcelamento($connection);
-        $this->migrarColunaTema($connection);
-        $this->migrarColunaTelefone($connection);
-        $this->migrarNivelPermissao($connection);
-        $this->migrarAporteMeta($connection);
-        $this->migrarLimiteCategoria($connection);
+        if ($this->tabelaExiste($connection, 'usuarios')) {
+            return;
+        }
+
+        if (!is_file(self::SCRIPT)) {
+            throw new RuntimeException('Arquivo do esquema do banco não encontrado: ' . self::SCRIPT);
+        }
+
+        $connection->exec(file_get_contents(self::SCRIPT));
     }
 
-    private function migrarColunasAntigas(PDO $connection): void
+    // usuario_comum.ultimo_acesso (antes chamada data_ultimo_xp): base da sequência de dias de acesso
+    private function migrarUltimoAcesso(PDO $connection): void
     {
-        $colunas = $connection->query(
-            "SELECT COLUMN_NAME FROM information_schema.COLUMNS " .
-            "WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'usuario_comum'"
-        )->fetchAll(PDO::FETCH_COLUMN);
+        $colunas = $this->getColunas($connection, 'usuario_comum');
 
-        if (in_array('data_ultimo_xp', $colunas, true) && !in_array('ultimo_acesso', $colunas, true)) {
-            $connection->exec(
-                "ALTER TABLE usuario_comum CHANGE COLUMN data_ultimo_xp ultimo_acesso DATE NULL"
-            );
-        } elseif (!in_array('ultimo_acesso', $colunas, true)) {
-            $connection->exec(
-                "ALTER TABLE usuario_comum ADD COLUMN ultimo_acesso DATE NULL AFTER maior_streak"
-            );
+        if (in_array('ultimo_acesso', $colunas, true)) {
+            return;
+        }
+
+        if (in_array('data_ultimo_xp', $colunas, true)) {
+            $connection->exec("ALTER TABLE usuario_comum CHANGE COLUMN data_ultimo_xp ultimo_acesso DATE NULL");
+        } else {
+            $connection->exec("ALTER TABLE usuario_comum ADD COLUMN ultimo_acesso DATE NULL AFTER maior_streak");
         }
     }
 
@@ -135,20 +157,20 @@ class DatabaseInitializer
     private function migrarColunaTelefone(PDO $connection): void
     {
         $usuarioColunas = $this->getColunas($connection, 'usuarios');
- 
+
         if (!in_array('telefone', $usuarioColunas, true)) {
             $connection->exec("ALTER TABLE usuarios ADD COLUMN telefone VARCHAR(11) NULL AFTER email");
         }
     }
 
-     // RN 01 e RN 09: nivel 1 = administrador chefe, nivel 2 = administrador comum
+    // RN 01 e RN 09: nível 1 = administrador chefe, nível 2 = administrador comum
     private function migrarNivelPermissao(PDO $connection): void
     {
         $colunas = $this->getColunas($connection, 'administradores');
- 
+
         if (!in_array('nivel_permissao', $colunas, true)) {
             $connection->exec("ALTER TABLE administradores ADD COLUMN nivel_permissao INT NOT NULL DEFAULT 2 AFTER usuario_id");
- 
+
             // o administrador mais antigo (a conta criada pelo script do banco) passa a ser o chefe
             $connection->exec(
                 "UPDATE administradores SET nivel_permissao = 1 " .
@@ -188,27 +210,36 @@ class DatabaseInitializer
         }
     }
 
-    // RF 12: limite mensal de gastos de cada usuário por categoria
+    // RF 12: limite mensal de gastos de cada usuário por categoria.
+    // Substitui a antiga categorias.limite_orcamento, que continua na tabela mas já não é usada.
     private function migrarLimiteCategoria(PDO $connection): void
     {
-        $existe = $connection->query(
-            "SELECT COUNT(*) FROM information_schema.TABLES " .
-            "WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'limites_categoria'"
-        )->fetchColumn();
-
-        if (!$existe) {
-            $connection->exec(
-                "CREATE TABLE limites_categoria (" .
-                "id INT AUTO_INCREMENT PRIMARY KEY, " .
-                "usuario_id INT NOT NULL, " .
-                "categoria_id INT NOT NULL, " .
-                "valor_limite DECIMAL(10,2) NOT NULL, " .
-                "UNIQUE KEY uk_limite_usuario_categoria (usuario_id, categoria_id), " .
-                "FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE, " .
-                "FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE CASCADE" .
-                ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-            );
+        if ($this->tabelaExiste($connection, 'limites_categoria')) {
+            return;
         }
+
+        $connection->exec(
+            "CREATE TABLE limites_categoria (" .
+            "id INT AUTO_INCREMENT PRIMARY KEY, " .
+            "usuario_id INT NOT NULL, " .
+            "categoria_id INT NOT NULL, " .
+            "valor_limite DECIMAL(10,2) NOT NULL, " .
+            "UNIQUE KEY uk_limite_usuario_categoria (usuario_id, categoria_id), " .
+            "FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE, " .
+            "FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE CASCADE" .
+            ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
+        );
+    }
+
+    private function tabelaExiste(PDO $connection, string $tabela): bool
+    {
+        $stmt = $connection->prepare(
+            "SELECT COUNT(*) FROM information_schema.TABLES " .
+            "WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :tabela"
+        );
+        $stmt->execute(['tabela' => $tabela]);
+
+        return (int) $stmt->fetchColumn() > 0;
     }
 
     private function getColunas(PDO $connection, string $tabela): array
