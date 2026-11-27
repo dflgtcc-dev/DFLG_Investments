@@ -305,136 +305,6 @@ a.dash-mes-botao:hover {
     background: #3dff8c;
 }
 
-.dash-card {
-    border: none;
-    border-radius: 1.25rem;
-}
-
-.dash-card .card-title {
-    font-weight: 700;
-}
-
-.dash-chart {
-    position: relative;
-    height: 280px;
-}
-
-.dash-chart-rosca {
-    height: 230px;
-}
-
-.dash-cor {
-    display: inline-block;
-    flex: none;
-    width: 0.7rem;
-    height: 0.7rem;
-    border-radius: 50%;
-}
-
-.dash-ritmo-valor {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.dash-barra-meta .progress-bar {
-    background: var(--dflg-verde);
-}
-
-/* permite que o texto de um item de lista encolha (com reticências) em vez de empurrar o valor para outra linha */
-.dash-min0 {
-    min-width: 0;
-}
-
-/* ==========================================================================
-   Responsividade (celular e tablet)
-   Bootstrap: sm >= 576px, md >= 768px, lg >= 992px
-   ========================================================================== */
-
-/* Dashboard: o topo é sempre escuro (no tema claro o texto branco sumia no fundo claro) */
-.dash-hero {
-    color: #ffffff;
-    background: #111317;
-}
-
-[data-bs-theme="dark"] .dash-hero {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.dash-nivel-texto {
-    color: rgba(255, 255, 255, 0.65);
-}
-
-/* Tema claro: o topo do dashboard fica branco, com texto escuro e o verde mais forte para ter contraste */
-[data-bs-theme="light"] .dash-hero {
-    color: #212529;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-}
-
-[data-bs-theme="light"] .dash-sub,
-[data-bs-theme="light"] .dash-rotulo,
-[data-bs-theme="light"] .dash-kpi-rotulo,
-[data-bs-theme="light"] .dash-nivel-texto,
-[data-bs-theme="light"] .dash-comparacao,
-[data-bs-theme="light"] .dash-var-neutra {
-    color: rgba(33, 37, 41, 0.65);
-}
-
-[data-bs-theme="light"] .dash-kpi,
-[data-bs-theme="light"] .dash-nivel {
-    background: #f6f7f9;
-    border-color: rgba(0, 0, 0, 0.08);
-}
-
-[data-bs-theme="light"] .dash-mes,
-[data-bs-theme="light"] .dash-var-neutra {
-    background: rgba(0, 0, 0, 0.06);
-}
-
-[data-bs-theme="light"] .dash-mes-botao {
-    color: #212529;
-    background: rgba(0, 0, 0, 0.08);
-}
-
-[data-bs-theme="light"] a.dash-mes-botao:hover {
-    color: #000000;
-    background: var(--dflg-verde);
-}
-
-[data-bs-theme="light"] .dash-xp {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-[data-bs-theme="light"] .dash-hero .dash-saldo-pos {
-    color: #0a8f43;
-}
-
-[data-bs-theme="light"] .dash-hero .dash-saldo-neg {
-    color: #d63a3a;
-}
-
-[data-bs-theme="light"] .dash-hero .dash-var-boa {
-    color: #0a7d3a;
-    background: rgba(10, 143, 67, 0.12);
-}
-
-[data-bs-theme="light"] .dash-hero .dash-var-ruim {
-    color: #c0392b;
-    background: rgba(214, 58, 58, 0.12);
-}
-
-[data-bs-theme="light"] .dash-hero .btn-outline-light {
-    color: #212529;
-    border-color: rgba(0, 0, 0, 0.3);
-}
-
-[data-bs-theme="light"] .dash-hero .btn-outline-light:hover {
-    color: #ffffff;
-    background: #212529;
-    border-color: #212529;
-}
-
 /* ==========================================================================
    Botões com a cara do DFLG (preto e verde)
    Redefinem as variáveis do Bootstrap, então nenhuma tela precisa mudar.
@@ -575,6 +445,136 @@ a.dash-mes-botao:hover {
     .btn:hover .bi {
         transform: none;
     }
+}
+
+.dash-card {
+    border: none;
+    border-radius: 1.25rem;
+}
+
+.dash-card .card-title {
+    font-weight: 700;
+}
+
+.dash-chart {
+    position: relative;
+    height: 280px;
+}
+
+.dash-chart-rosca {
+    height: 230px;
+}
+
+.dash-cor {
+    display: inline-block;
+    flex: none;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+}
+
+.dash-ritmo-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.dash-barra-meta .progress-bar {
+    background: var(--dflg-verde);
+}
+
+/* permite que o texto de um item de lista encolha (com reticências) em vez de empurrar o valor para outra linha */
+.dash-min0 {
+    min-width: 0;
+}
+
+/* ==========================================================================
+   Responsividade (celular e tablet)
+   Bootstrap: sm >= 576px, md >= 768px, lg >= 992px
+   ========================================================================== */
+
+/* Dashboard: o topo é sempre escuro (no tema claro o texto branco sumia no fundo claro) */
+.dash-hero {
+    color: #ffffff;
+    background: #111317;
+}
+
+[data-bs-theme="dark"] .dash-hero {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dash-nivel-texto {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* Tema claro: o topo do dashboard fica branco, com texto escuro e o verde mais forte para ter contraste */
+[data-bs-theme="light"] .dash-hero {
+    color: #212529;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+[data-bs-theme="light"] .dash-sub,
+[data-bs-theme="light"] .dash-rotulo,
+[data-bs-theme="light"] .dash-kpi-rotulo,
+[data-bs-theme="light"] .dash-nivel-texto,
+[data-bs-theme="light"] .dash-comparacao,
+[data-bs-theme="light"] .dash-var-neutra {
+    color: rgba(33, 37, 41, 0.65);
+}
+
+[data-bs-theme="light"] .dash-kpi,
+[data-bs-theme="light"] .dash-nivel {
+    background: #f6f7f9;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-bs-theme="light"] .dash-mes,
+[data-bs-theme="light"] .dash-var-neutra {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+[data-bs-theme="light"] .dash-mes-botao {
+    color: #212529;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+[data-bs-theme="light"] a.dash-mes-botao:hover {
+    color: #000000;
+    background: var(--dflg-verde);
+}
+
+[data-bs-theme="light"] .dash-xp {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="light"] .dash-hero .dash-saldo-pos {
+    color: #0a8f43;
+}
+
+[data-bs-theme="light"] .dash-hero .dash-saldo-neg {
+    color: #d63a3a;
+}
+
+[data-bs-theme="light"] .dash-hero .dash-var-boa {
+    color: #0a7d3a;
+    background: rgba(10, 143, 67, 0.12);
+}
+
+[data-bs-theme="light"] .dash-hero .dash-var-ruim {
+    color: #c0392b;
+    background: rgba(214, 58, 58, 0.12);
+}
+
+[data-bs-theme="light"] .dash-hero .btn-outline-light {
+    color: #212529;
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+[data-bs-theme="light"] .dash-hero .btn-outline-light:hover {
+    color: #ffffff;
+    background: #212529;
+    border-color: #212529;
 }
 
 /* Link da página atual no menu */
