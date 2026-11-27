@@ -18,6 +18,16 @@ define('APP_NAME', 'DFLG Investments');
 date_default_timezone_set('America/Sao_Paulo');
 define('URL_BASE', 'https://dflg-investments.ethiodeploy.app');
 
+// URL de um arquivo de public/assets com versão (?v=) que muda quando o arquivo muda.
+// Evita que o navegador ou o cache da hospedagem sigam entregando CSS/JS antigo depois do deploy.
+function asset(string $caminho): string
+{
+    $arquivo = __DIR__ . '/../../public/assets/' . $caminho;
+    $versao = is_file($arquivo) ? substr(md5_file($arquivo), 0, 10) : '0';
+
+    return URL_BASE . '/assets/' . $caminho . '?v=' . $versao;
+}
+
 //Configurações do Banco de dados
 define('DB_HOST', '');
 define('DB_NAME', '');
