@@ -747,3 +747,83 @@ a.dash-mes-botao:hover {
         min-width: min(16rem, calc(100vw - 2rem));
     }
 }
+
+/* ==========================================================================
+   Cor primária do Bootstrap: troca o azul padrão pelo verde da marca.
+   Cobre o que os botões .btn-* acima não alcançam: abas e pílulas ativas,
+   paginação, caixas e chaves marcadas, foco dos campos, barras de progresso,
+   links, badges e textos .text-primary.
+   No claro usa um verde mais escuro (o neon some no branco); no escuro, o neon.
+   ========================================================================== */
+:root,
+[data-bs-theme="light"] {
+    --bs-primary: #067a3a;
+    --bs-primary-rgb: 6, 122, 58;
+    --bs-link-color: #067a3a;
+    --bs-link-color-rgb: 6, 122, 58;
+    --bs-link-hover-color: #055c2b;
+    --bs-link-hover-color-rgb: 5, 92, 43;
+}
+
+[data-bs-theme="dark"] {
+    --bs-primary: #08f068;
+    --bs-primary-rgb: 8, 240, 104;
+    --bs-link-color: #08f068;
+    --bs-link-color-rgb: 8, 240, 104;
+    --bs-link-hover-color: #3dff8c;
+    --bs-link-hover-color-rgb: 61, 255, 140;
+}
+
+/* badge com fundo neon: texto preto para dar contraste */
+[data-bs-theme="dark"] .badge.bg-primary {
+    --bs-badge-color: #000000;
+}
+
+/* abas em pílula (Ranking, Relatórios) */
+.nav-pills {
+    --bs-nav-pills-link-active-color: #000000;
+    --bs-nav-pills-link-active-bg: var(--dflg-verde);
+}
+
+/* paginação (admin) */
+.pagination {
+    --bs-pagination-hover-color: var(--bs-link-hover-color);
+    --bs-pagination-focus-color: var(--bs-link-hover-color);
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(8, 240, 104, 0.25);
+    --bs-pagination-active-color: #000000;
+    --bs-pagination-active-bg: var(--dflg-verde);
+    --bs-pagination-active-border-color: var(--dflg-verde);
+}
+
+/* item de menu pressionado */
+.dropdown-menu {
+    --bs-dropdown-link-active-color: #000000;
+    --bs-dropdown-link-active-bg: var(--dflg-verde);
+}
+
+/* barras de progresso sem cor definida */
+.progress {
+    --bs-progress-bar-bg: var(--dflg-verde);
+}
+
+/* foco dos campos */
+.form-control:focus,
+.form-select:focus {
+    border-color: rgb(var(--bs-primary-rgb));
+    box-shadow: 0 0 0 0.25rem rgba(8, 240, 104, 0.25);
+}
+
+/* caixas de seleção e chaves (switch) */
+.form-check-input:checked {
+    background-color: #0a8f43;
+    border-color: #0a8f43;
+}
+
+.form-check-input:focus {
+    border-color: rgb(var(--bs-primary-rgb));
+    box-shadow: 0 0 0 0.25rem rgba(8, 240, 104, 0.25);
+}
+
+.form-switch .form-check-input:focus:not(:checked) {
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2306c455'/%3e%3c/svg%3e");
+}
