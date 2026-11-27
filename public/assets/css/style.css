@@ -827,3 +827,17 @@ a.dash-mes-botao:hover {
 .form-switch .form-check-input:focus:not(:checked) {
     --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2306c455'/%3e%3c/svg%3e");
 }
+
+/* controles nativos do navegador (calendário, seletor, barras) e seleção de texto */
+:root {
+    accent-color: #0a8f43;
+}
+
+::selection {
+    background: rgba(8, 240, 104, 0.35);
+}
+
+/* aviso de XP (toast) e outros .text-bg-primary: no escuro o fundo é neon, então o texto vai preto */
+[data-bs-theme="dark"] .text-bg-primary {
+    color: #000000 !important;
+}
