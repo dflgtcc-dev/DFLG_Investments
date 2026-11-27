@@ -1015,18 +1015,18 @@ a.dash-mes-botao:hover {
 .btn-primary.px-4,
 .btn-success.px-4,
 button.btn-primary[type="submit"]:not(.mt-4) {
-    --bs-btn-color: var(--tinta-texto);
-    --bs-btn-bg: var(--tinta);
-    --bs-btn-border-color: var(--tinta);
-    --bs-btn-hover-color: var(--tinta-texto);
-    --bs-btn-hover-bg: var(--tinta-hover);
-    --bs-btn-hover-border-color: var(--tinta-hover);
-    --bs-btn-active-color: var(--tinta-texto);
-    --bs-btn-active-bg: var(--tinta-hover);
-    --bs-btn-active-border-color: var(--tinta-hover);
-    --bs-btn-disabled-color: var(--tinta-texto);
-    --bs-btn-disabled-bg: var(--tinta);
-    --bs-btn-disabled-border-color: var(--tinta);
+    --bs-btn-color: var(--confirmar-texto);
+    --bs-btn-bg: var(--confirmar-bg);
+    --bs-btn-border-color: var(--confirmar-bg);
+    --bs-btn-hover-color: var(--confirmar-texto);
+    --bs-btn-hover-bg: var(--confirmar-hover);
+    --bs-btn-hover-border-color: var(--confirmar-hover);
+    --bs-btn-active-color: var(--confirmar-texto);
+    --bs-btn-active-bg: var(--confirmar-hover);
+    --bs-btn-active-border-color: var(--confirmar-hover);
+    --bs-btn-disabled-color: var(--confirmar-texto);
+    --bs-btn-disabled-bg: var(--confirmar-bg);
+    --bs-btn-disabled-border-color: var(--confirmar-bg);
 }
 
 /* ==========================================================================
@@ -1082,15 +1082,15 @@ button.btn-primary[type="submit"]:not(.mt-4) {
 
 /* Aportar (lista de metas): botão de confirmação, branco */
 .btn-outline-success.btn-sm:has(.bi-piggy-bank) {
-    --bs-btn-color: var(--tinta-texto);
-    --bs-btn-bg: var(--tinta);
-    --bs-btn-border-color: var(--tinta);
-    --bs-btn-hover-color: var(--tinta-texto);
-    --bs-btn-hover-bg: var(--tinta-hover);
-    --bs-btn-hover-border-color: var(--tinta-hover);
-    --bs-btn-active-color: var(--tinta-texto);
-    --bs-btn-active-bg: var(--tinta-hover);
-    --bs-btn-active-border-color: var(--tinta-hover);
+    --bs-btn-color: var(--confirmar-texto);
+    --bs-btn-bg: var(--confirmar-bg);
+    --bs-btn-border-color: var(--confirmar-bg);
+    --bs-btn-hover-color: var(--confirmar-texto);
+    --bs-btn-hover-bg: var(--confirmar-hover);
+    --bs-btn-hover-border-color: var(--confirmar-hover);
+    --bs-btn-active-color: var(--confirmar-texto);
+    --bs-btn-active-bg: var(--confirmar-hover);
+    --bs-btn-active-border-color: var(--confirmar-hover);
 }
 
 /* ==========================================================================
@@ -1121,4 +1121,18 @@ a.btn-danger:not(.btn-sm) {
     --bs-btn-active-color: var(--perigo-texto-hover);
     --bs-btn-active-bg: var(--perigo-fundo-hover);
     --bs-btn-active-border-color: var(--perigo-borda-hover);
+}
+
+/* cores dos botões de confirmação: branco com hover mais claro (no modo claro: preto com hover mais suave) */
+:root,
+[data-bs-theme="light"] {
+    --confirmar-bg: #000000;
+    --confirmar-hover: #2e2e2e;
+    --confirmar-texto: #ffffff;
+}
+
+[data-bs-theme="dark"] {
+    --confirmar-bg: #e1e4e2;
+    --confirmar-hover: #ffffff;
+    --confirmar-texto: #000000;
 }
