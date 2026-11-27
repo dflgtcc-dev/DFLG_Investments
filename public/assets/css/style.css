@@ -435,6 +435,148 @@ a.dash-mes-botao:hover {
     border-color: #212529;
 }
 
+/* ==========================================================================
+   Botões com a cara do DFLG (preto e verde)
+   Redefinem as variáveis do Bootstrap, então nenhuma tela precisa mudar.
+   O vermelho (btn-danger) continua vermelho, porque indica perigo.
+   ========================================================================== */
+
+.btn {
+    --bs-btn-border-radius: 0.6rem;
+    --bs-btn-font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+/* só a largura aumenta: a altura continua igual à dos campos de formulário ao lado */
+.btn:not(.btn-sm):not(.btn-lg) {
+    --bs-btn-padding-x: 1.1rem;
+}
+
+.btn-sm {
+    --bs-btn-border-radius: 0.5rem;
+}
+
+/* movimento: sobe um pouco no hover e afunda ao clicar (fora de grupos, para não desalinhar as bordas) */
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.input-group .btn:hover,
+.input-group .btn:active,
+.btn-group > .btn:hover,
+.btn-group > .btn:active {
+    transform: none;
+}
+
+/* o ícone dentro do botão cresce de leve no hover */
+.btn .bi {
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.btn:hover .bi {
+    transform: scale(1.15);
+}
+
+/* ----- principal: verde da marca com texto preto ----- */
+.btn-primary,
+.btn-success {
+    --bs-btn-color: #000000;
+    --bs-btn-bg: var(--dflg-verde);
+    --bs-btn-border-color: var(--dflg-verde);
+    --bs-btn-hover-color: #000000;
+    --bs-btn-hover-bg: #3dff8c;
+    --bs-btn-hover-border-color: #3dff8c;
+    --bs-btn-active-color: #000000;
+    --bs-btn-active-bg: #06c455;
+    --bs-btn-active-border-color: #06c455;
+    --bs-btn-disabled-color: #000000;
+    --bs-btn-disabled-bg: var(--dflg-verde);
+    --bs-btn-disabled-border-color: var(--dflg-verde);
+    --bs-btn-focus-shadow-rgb: 8, 240, 104;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-dflg:hover {
+    box-shadow: 0 6px 18px rgba(8, 240, 104, 0.4);
+}
+
+/* ----- contorno verde: no claro o verde é mais escuro (o neon some no branco); no escuro, o neon ----- */
+.btn-outline-primary,
+.btn-outline-success {
+    --bs-btn-color: #067a3a;
+    --bs-btn-border-color: #067a3a;
+    --bs-btn-hover-color: #000000;
+    --bs-btn-hover-bg: var(--dflg-verde);
+    --bs-btn-hover-border-color: var(--dflg-verde);
+    --bs-btn-active-color: #000000;
+    --bs-btn-active-bg: var(--dflg-verde);
+    --bs-btn-active-border-color: var(--dflg-verde);
+    --bs-btn-disabled-color: #067a3a;
+    --bs-btn-disabled-border-color: #067a3a;
+    --bs-btn-focus-shadow-rgb: 8, 240, 104;
+}
+
+[data-bs-theme="dark"] .btn-outline-primary,
+[data-bs-theme="dark"] .btn-outline-success {
+    --bs-btn-color: var(--dflg-verde);
+    --bs-btn-border-color: var(--dflg-verde);
+    --bs-btn-disabled-color: var(--dflg-verde);
+    --bs-btn-disabled-border-color: var(--dflg-verde);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-success:hover {
+    box-shadow: 0 6px 18px rgba(8, 240, 104, 0.3);
+}
+
+/* ----- secundário (Cancelar, Voltar): contorno neutro que enche de preto no claro e de branco no escuro ----- */
+.btn-outline-secondary {
+    --bs-btn-color: var(--bs-body-color);
+    --bs-btn-border-color: var(--bs-secondary-color);
+    --bs-btn-hover-color: var(--bs-body-bg);
+    --bs-btn-hover-bg: var(--bs-body-color);
+    --bs-btn-hover-border-color: var(--bs-body-color);
+    --bs-btn-active-color: var(--bs-body-bg);
+    --bs-btn-active-bg: var(--bs-body-color);
+    --bs-btn-active-border-color: var(--bs-body-color);
+    --bs-btn-focus-shadow-rgb: 8, 240, 104;
+}
+
+.btn-outline-secondary:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+[data-bs-theme="dark"] .btn-outline-secondary:hover {
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.12);
+}
+
+/* ----- perigo: continua vermelho, só ganha o mesmo brilho dos outros ----- */
+.btn-danger:hover,
+.btn-outline-danger:hover {
+    box-shadow: 0 6px 18px rgba(220, 53, 69, 0.35);
+}
+
+/* quem desativa animações no sistema não vê movimento */
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn .bi {
+        transition: none;
+    }
+
+    .btn:hover,
+    .btn:active,
+    .btn:hover .bi {
+        transform: none;
+    }
+}
+
 /* Link da página atual no menu */
 .nav-link-dflg.ativo {
     color: #ffffff;
