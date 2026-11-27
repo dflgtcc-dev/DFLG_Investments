@@ -48,7 +48,7 @@ $parcelas = $painel['parcelas'];
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <!-- CSS próprio -->
-    <link href="<?= URL_BASE ?>/assets/css/style.css" rel="stylesheet">
+    <link href="<?= asset('css/style.css') ?>" rel="stylesheet">
 </head>
 
 <body>
@@ -464,7 +464,7 @@ $parcelas = $painel['parcelas'];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Chart.js (versão fixa) e o script do dashboard -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
-    <script src="<?= URL_BASE ?>/assets/js/dashboard.js"></script>
+    <script src="<?= asset('js/dashboard.js') ?>"></script>
 </body>
 
 </html>

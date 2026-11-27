@@ -38,8 +38,8 @@ $duvidas = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- CSS próprio -->
-    <link href="<?= URL_BASE ?>/assets/css/style.css" rel="stylesheet">
-    <link href="<?= URL_BASE ?>/assets/css/home.css" rel="stylesheet">
+    <link href="<?= asset('css/style.css') ?>" rel="stylesheet">
+    <link href="<?= asset('css/home.css') ?>" rel="stylesheet">
 </head>
 
 <body class="dflg-pagina home-pagina">

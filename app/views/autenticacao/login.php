@@ -21,10 +21,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- CSS próprio -->
-    <link href="<?= URL_BASE ?>/assets/css/style.css" rel="stylesheet">
-    <link href="<?= URL_BASE ?>/assets/css/home.css" rel="stylesheet">
+    <link href="<?= asset('css/style.css') ?>" rel="stylesheet">
+    <link href="<?= asset('css/home.css') ?>" rel="stylesheet">
     <!-- tema claro/escuro (no head para não piscar) -->
-    <script src="<?= URL_BASE ?>/assets/js/tema.js"></script>
+    <script src="<?= asset('js/tema.js') ?>"></script>
 </head>
 
 <body class="dflg-pagina auth-pagina">
@@ -38,10 +38,10 @@
         </button>
     </div>
 
-    <div class="card auth-card" style="max-width: 440px;">
+    <div class="card auth-card" style="max-width: 380px;">
         <div class="card-body">
-            <div class="text-center mb-4">
-                <img src="<?= URL_BASE ?>/assets/img/logo-dflg-transparent.png" alt="DFLG" style="width: 64px;">
+            <div class="text-center mb-3">
+                <img src="<?= URL_BASE ?>/assets/img/logo-dflg-transparent.png" alt="DFLG" style="width: 48px;">
                 <h3 class="card-title mt-2">DFLG Investments</h3>
                 <span class="home-selo">Dream. Fund. Learn. Grow.</span>
             </div>
@@ -56,20 +56,14 @@
             <?php endif; ?>
 
             <form action="<?= URL_BASE ?>/logar" method="post">
-                <div class="mb-2">
-                    <label for="email" class="form-label small">E-mail</label>
-                    <div class="input-group">
-                        <span class="input-group-text text-muted"><i class="bi bi-envelope"></i></span>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" required>
-                    </div>
+                <div class="input-group mb-2">
+                    <span class="input-group-text text-muted"><i class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" id="email" name="email" required placeholder="E-mail" aria-label="E-mail">
                 </div>
 
-                <div class="mb-4">
-                    <label for="senha" class="form-label small">Senha</label>
-                    <div class="input-group">
-                        <span class="input-group-text text-muted"><i class="bi bi-lock"></i></span>
-                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Sua senha" required>
-                    </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text text-muted"><i class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control" id="senha" name="senha" required placeholder="Senha" aria-label="Senha">
                 </div>
 
                 <div class="d-grid">
@@ -87,7 +81,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= URL_BASE ?>/assets/js/senha.js"></script>
+    <script src="<?= asset('js/senha.js') ?>"></script>
 </body>
 
 </html>

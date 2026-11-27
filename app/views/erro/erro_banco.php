@@ -16,7 +16,7 @@ $temaBootstrap = (isset($_SESSION['usuario_logado']) && $_SESSION['usuario_logad
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <!-- CSS próprio -->
-    <link href="<?= URL_BASE ?>/assets/css/style.css" rel="stylesheet">
+    <link href="<?= asset('css/style.css') ?>" rel="stylesheet">
 </head>
 
 <body>

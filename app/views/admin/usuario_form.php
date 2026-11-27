@@ -28,7 +28,7 @@ $erro = function (string $campo) use ($erros) {
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <!-- CSS próprio -->
-    <link href="<?= URL_BASE ?>/assets/css/style.css" rel="stylesheet">
+    <link href="<?= asset('css/style.css') ?>" rel="stylesheet">
 </head>
 
 <body>
@@ -174,7 +174,7 @@ $erro = function (string $campo) use ($erros) {
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= URL_BASE ?>/assets/js/senha.js"></script>
+    <script src="<?= asset('js/senha.js') ?>"></script>
     <script>
         // máscara do telefone: (45) 99999-9999 ou (45) 3523-1234; o servidor guarda só os dígitos
         document.getElementById('telefone').addEventListener('input', function () {
