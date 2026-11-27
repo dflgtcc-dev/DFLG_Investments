@@ -951,3 +951,57 @@ a.dash-mes-botao:hover {
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
+
+/* ==========================================================================
+   Ações do dia a dia (Nova transação, Novo parcelamento, Editar perfil, Calcular,
+   Lançar parcela, Extrato...): mesmo estilo do botão de editar.
+   Preto com contorno e ícone; ao passar o mouse, só um tom suave de verde.
+   Continuam verdes e sólidos: botões de salvar/cadastrar (px-4) e filtros marcados (rounded-pill).
+   ========================================================================== */
+.btn-primary:not(.px-4):not(.rounded-pill),
+.btn-success.btn-sm {
+    --bs-btn-color: var(--neutro-texto);
+    --bs-btn-bg: var(--neutro-bg);
+    --bs-btn-border-color: var(--neutro-borda);
+    --bs-btn-hover-color: var(--verde-texto);
+    --bs-btn-hover-bg: var(--verde-suave);
+    --bs-btn-hover-border-color: var(--verde-borda);
+    --bs-btn-active-color: var(--verde-texto);
+    --bs-btn-active-bg: var(--verde-suave-forte);
+    --bs-btn-active-border-color: var(--verde-borda);
+    --bs-btn-disabled-color: var(--neutro-texto);
+    --bs-btn-disabled-bg: var(--neutro-bg);
+    --bs-btn-disabled-border-color: var(--neutro-borda);
+}
+
+/* parcela vencida (Lançar em atraso): mesmo botão, com o tom de vermelho já no contorno */
+.btn-danger.btn-sm {
+    --bs-btn-color: var(--perigo-texto-hover);
+    --bs-btn-bg: var(--neutro-bg);
+    --bs-btn-border-color: var(--perigo-borda-hover);
+    --bs-btn-hover-color: var(--perigo-texto-hover);
+    --bs-btn-hover-bg: var(--perigo-fundo-hover);
+    --bs-btn-hover-border-color: var(--perigo-texto-hover);
+    --bs-btn-active-color: var(--perigo-texto-hover);
+    --bs-btn-active-bg: var(--perigo-fundo-hover);
+    --bs-btn-active-border-color: var(--perigo-texto-hover);
+    --bs-btn-disabled-color: var(--perigo-texto-hover);
+    --bs-btn-disabled-bg: var(--neutro-bg);
+    --bs-btn-disabled-border-color: var(--perigo-borda-hover);
+}
+
+/* dashboard: Nova transação e Ver extrato do mês */
+[data-bs-theme] .dash-hero .btn-dflg,
+[data-bs-theme] .dash-hero .btn-outline-light:not(.rounded-pill) {
+    color: var(--neutro-texto);
+    font-weight: 500;
+    background: var(--neutro-bg);
+    border: 1px solid var(--neutro-borda);
+}
+
+[data-bs-theme] .dash-hero .btn-dflg:hover,
+[data-bs-theme] .dash-hero .btn-outline-light:not(.rounded-pill):hover {
+    color: var(--verde-texto);
+    background: var(--verde-suave);
+    border-color: var(--verde-borda);
+}
