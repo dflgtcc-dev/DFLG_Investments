@@ -489,4 +489,5 @@ body.auth-pagina .auth-card { --h-verde-texto: var(--h-texto); }
     color: var(--h-superficie);
     background: var(--h-texto);
     opacity: 0.85;
+    box-shadow: none;
 }
