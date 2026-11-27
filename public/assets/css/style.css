@@ -331,6 +331,11 @@ a.dash-mes-botao:hover {
     --perigo-solido: #8c4645;
     --perigo-solido-hover: #763a39;
     --perigo-vivo: #c9363b;
+    --verde-borda: rgba(6, 122, 58, 0.55);
+    --perigo-texto-hover: #c9363b;
+    --perigo-fundo-hover: rgba(201, 54, 59, 0.12);
+    --perigo-borda-hover: rgba(201, 54, 59, 0.55);
+    --aviso-borda: rgba(138, 100, 16, 0.55);
     --neutro-bg: #000000;
     --neutro-borda: #000000;
     --neutro-texto: #ffffff;
@@ -365,6 +370,11 @@ a.dash-mes-botao:hover {
     --perigo-solido: #a85a59;
     --perigo-solido-hover: #bb6b6a;
     --perigo-vivo: #e5484d;
+    --verde-borda: rgba(61, 220, 132, 0.55);
+    --perigo-texto-hover: #ff6b70;
+    --perigo-fundo-hover: rgba(229, 72, 77, 0.14);
+    --perigo-borda-hover: rgba(255, 107, 112, 0.55);
+    --aviso-borda: rgba(226, 185, 94, 0.55);
     --neutro-bg: #000000;
     --neutro-borda: rgba(255, 255, 255, 0.75);
     --neutro-texto: #ffffff;
@@ -427,18 +437,18 @@ a.dash-mes-botao:hover {
     --bs-btn-disabled-border-color: var(--verde-solido);
 }
 
-/* ----- editar e ações de apoio: preto com contorno e ícone; verde ao passar o mouse ----- */
+/* ----- editar e ações de apoio: preto com contorno e ícone; ao passar o mouse só ganha um tom de verde (fundo suave, borda e texto) ----- */
 .btn-outline-primary,
 .btn-outline-success {
     --bs-btn-color: var(--neutro-texto);
     --bs-btn-bg: var(--neutro-bg);
     --bs-btn-border-color: var(--neutro-borda);
-    --bs-btn-hover-color: var(--verde-solido-texto);
-    --bs-btn-hover-bg: var(--verde-solido);
-    --bs-btn-hover-border-color: var(--verde-solido);
-    --bs-btn-active-color: var(--verde-solido-texto);
-    --bs-btn-active-bg: var(--verde-solido-hover);
-    --bs-btn-active-border-color: var(--verde-solido-hover);
+    --bs-btn-hover-color: var(--verde-texto);
+    --bs-btn-hover-bg: var(--verde-suave);
+    --bs-btn-hover-border-color: var(--verde-borda);
+    --bs-btn-active-color: var(--verde-texto);
+    --bs-btn-active-bg: var(--verde-suave-forte);
+    --bs-btn-active-border-color: var(--verde-borda);
     --bs-btn-disabled-color: var(--neutro-texto);
     --bs-btn-disabled-bg: var(--neutro-bg);
     --bs-btn-disabled-border-color: var(--neutro-borda);
@@ -473,17 +483,17 @@ a.dash-mes-botao:hover {
     --bs-btn-disabled-border-color: transparent;
 }
 
-/* ----- excluir: preto com contorno e ícone; vermelho ao passar o mouse ----- */
+/* ----- excluir: preto com contorno e ícone; ao passar o mouse só ganha um tom de vermelho ----- */
 .btn-outline-danger {
     --bs-btn-color: var(--neutro-texto);
     --bs-btn-bg: var(--neutro-bg);
     --bs-btn-border-color: var(--neutro-borda);
-    --bs-btn-hover-color: #ffffff;
-    --bs-btn-hover-bg: var(--perigo-vivo);
-    --bs-btn-hover-border-color: var(--perigo-vivo);
-    --bs-btn-active-color: #ffffff;
-    --bs-btn-active-bg: var(--perigo-vivo);
-    --bs-btn-active-border-color: var(--perigo-vivo);
+    --bs-btn-hover-color: var(--perigo-texto-hover);
+    --bs-btn-hover-bg: var(--perigo-fundo-hover);
+    --bs-btn-hover-border-color: var(--perigo-borda-hover);
+    --bs-btn-active-color: var(--perigo-texto-hover);
+    --bs-btn-active-bg: var(--perigo-fundo-hover);
+    --bs-btn-active-border-color: var(--perigo-borda-hover);
     --bs-btn-disabled-color: var(--neutro-texto);
     --bs-btn-disabled-bg: var(--neutro-bg);
     --bs-btn-disabled-border-color: var(--neutro-borda);
@@ -507,17 +517,17 @@ a.dash-mes-botao:hover {
     --bs-btn-focus-shadow-rgb: 148, 80, 79;
 }
 
-/* ----- aviso (Bloquear): preto com contorno; âmbar ao passar o mouse ----- */
+/* ----- aviso (Bloquear): preto com contorno; ao passar o mouse só ganha um tom de âmbar ----- */
 .btn-outline-warning {
     --bs-btn-color: var(--neutro-texto);
     --bs-btn-bg: var(--neutro-bg);
     --bs-btn-border-color: var(--neutro-borda);
-    --bs-btn-hover-color: #000000;
-    --bs-btn-hover-bg: var(--aviso-vivo);
-    --bs-btn-hover-border-color: var(--aviso-vivo);
-    --bs-btn-active-color: #000000;
-    --bs-btn-active-bg: var(--aviso-vivo);
-    --bs-btn-active-border-color: var(--aviso-vivo);
+    --bs-btn-hover-color: var(--aviso);
+    --bs-btn-hover-bg: var(--aviso-suave);
+    --bs-btn-hover-border-color: var(--aviso-borda);
+    --bs-btn-active-color: var(--aviso);
+    --bs-btn-active-bg: var(--aviso-suave);
+    --bs-btn-active-border-color: var(--aviso-borda);
     --bs-btn-disabled-color: var(--neutro-texto);
     --bs-btn-disabled-bg: var(--neutro-bg);
     --bs-btn-disabled-border-color: var(--neutro-borda);
