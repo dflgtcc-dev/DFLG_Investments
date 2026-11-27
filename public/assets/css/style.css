@@ -994,17 +994,15 @@ a.dash-mes-botao:hover {
     --bs-btn-disabled-border-color: var(--perigo-borda-hover);
 }
 
-/* dashboard: Nova transação e Ver extrato do mês */
-[data-bs-theme] .dash-hero .btn-dflg,
-[data-bs-theme] .dash-hero .btn-outline-light:not(.rounded-pill) {
+/* dashboard: Nova transação */
+[data-bs-theme] .dash-hero .btn-dflg {
     color: var(--neutro-texto);
     font-weight: 500;
     background: var(--neutro-bg);
     border: 1px solid var(--neutro-borda);
 }
 
-[data-bs-theme] .dash-hero .btn-dflg:hover,
-[data-bs-theme] .dash-hero .btn-outline-light:not(.rounded-pill):hover {
+[data-bs-theme] .dash-hero .btn-dflg:hover {
     color: var(--verde-texto);
     background: var(--verde-hover-fundo);
     border-color: var(--verde-borda);
@@ -1029,4 +1027,68 @@ button.btn-primary[type="submit"]:not(.mt-4) {
     --bs-btn-disabled-color: var(--tinta-texto);
     --bs-btn-disabled-bg: var(--tinta);
     --bs-btn-disabled-border-color: var(--tinta);
+}
+
+/* ==========================================================================
+   Extrato (Ver extrato do mês, Gerar extrato): contorno neutro, hover cinza (como o Desfazer)
+   ========================================================================== */
+.btn-outline-primary.w-100 {
+    --bs-btn-color: var(--bs-body-color);
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: var(--linha);
+    --bs-btn-hover-color: var(--bs-body-color);
+    --bs-btn-hover-bg: var(--fundo-suave);
+    --bs-btn-hover-border-color: var(--linha-forte);
+    --bs-btn-active-color: var(--bs-body-color);
+    --bs-btn-active-bg: var(--fundo-suave);
+    --bs-btn-active-border-color: var(--linha-forte);
+}
+
+[data-bs-theme] .dash-hero .btn-outline-light:not(.rounded-pill) {
+    color: var(--bs-body-color);
+    background: transparent;
+    border-color: var(--linha);
+}
+
+[data-bs-theme] .dash-hero .btn-outline-light:not(.rounded-pill):hover {
+    color: var(--bs-body-color);
+    background: var(--fundo-suave);
+    border-color: var(--linha-forte);
+}
+
+/* ==========================================================================
+   Ações de linha (editar, excluir, bloquear, desbloquear): sem fundo e sem borda,
+   misturadas com a tela; a cor só aparece ao passar o mouse.
+   (:has() localiza o botão pelo ícone, então nenhuma view precisa mudar)
+   ========================================================================== */
+.btn-sm.btn-outline-primary:has(.bi-pencil),
+.btn-sm.btn-outline-danger,
+.btn-sm.btn-outline-warning,
+.btn-sm.btn-outline-success:has(.bi-unlock) {
+    --bs-btn-color: var(--bs-secondary-color);
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: transparent;
+    --bs-btn-disabled-color: var(--bs-secondary-color);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: transparent;
+}
+
+.btn-sm.btn-outline-primary:has(.bi-pencil),
+.btn-sm.btn-outline-success:has(.bi-unlock) {
+    --bs-btn-hover-color: var(--verde-texto);
+    --bs-btn-hover-bg: var(--verde-hover-fundo);
+    --bs-btn-hover-border-color: var(--verde-borda);
+}
+
+/* Aportar (lista de metas): botão de confirmação, branco */
+.btn-outline-success.btn-sm:has(.bi-piggy-bank) {
+    --bs-btn-color: var(--tinta-texto);
+    --bs-btn-bg: var(--tinta);
+    --bs-btn-border-color: var(--tinta);
+    --bs-btn-hover-color: var(--tinta-texto);
+    --bs-btn-hover-bg: var(--tinta-hover);
+    --bs-btn-hover-border-color: var(--tinta-hover);
+    --bs-btn-active-color: var(--tinta-texto);
+    --bs-btn-active-bg: var(--tinta-hover);
+    --bs-btn-active-border-color: var(--tinta-hover);
 }
