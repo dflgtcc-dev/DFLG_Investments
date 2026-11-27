@@ -64,7 +64,7 @@ body {
 
 /* Modo escuro (RNF 07): o Bootstrap aplica data-bs-theme="dark" no <html> */
 [data-bs-theme="dark"] body {
-    background-color: #14161a;
+    background-color: #000000;
 }
 
 /* bg-light e table-light têm cor fixa no Bootstrap; no modo escuro usam a cor de superfície dele */
@@ -313,8 +313,8 @@ a.dash-mes-botao:hover {
    ========================================================================== */
 :root,
 [data-bs-theme="light"] {
-    --tinta: #111412;
-    --tinta-hover: #2c322e;
+    --tinta: #000000;
+    --tinta-hover: #262626;
     --tinta-texto: #ffffff;
     --linha: rgba(17, 20, 18, 0.16);
     --linha-forte: rgba(17, 20, 18, 0.34);
@@ -330,14 +330,26 @@ a.dash-mes-botao:hover {
     --perigo-linha: rgba(148, 80, 79, 0.4);
     --perigo-solido: #8c4645;
     --perigo-solido-hover: #763a39;
+    --perigo-vivo: #c9363b;
+    --neutro-bg: #000000;
+    --neutro-borda: #000000;
+    --neutro-texto: #ffffff;
+    --aviso-vivo: #b7791f;
     --aviso: #8a6410;
     --aviso-suave: rgba(138, 100, 16, 0.1);
 }
 
 [data-bs-theme="dark"] {
+    --bs-body-bg: #000000;
+    --bs-body-bg-rgb: 0, 0, 0;
+    --bs-secondary-bg: #0e0f0f;
+    --bs-secondary-bg-rgb: 14, 15, 15;
+    --bs-tertiary-bg: #0a0b0b;
+    --bs-tertiary-bg-rgb: 10, 11, 11;
+    --bs-border-color: rgba(255, 255, 255, 0.12);
     --tinta: #f1f4f2;
     --tinta-hover: #ffffff;
-    --tinta-texto: #0b0d0c;
+    --tinta-texto: #000000;
     --linha: rgba(255, 255, 255, 0.16);
     --linha-forte: rgba(255, 255, 255, 0.36);
     --fundo-suave: rgba(255, 255, 255, 0.06);
@@ -352,6 +364,11 @@ a.dash-mes-botao:hover {
     --perigo-linha: rgba(214, 154, 153, 0.4);
     --perigo-solido: #a85a59;
     --perigo-solido-hover: #bb6b6a;
+    --perigo-vivo: #e5484d;
+    --neutro-bg: #000000;
+    --neutro-borda: rgba(255, 255, 255, 0.75);
+    --neutro-texto: #ffffff;
+    --aviso-vivo: #e2b95e;
     --aviso: #e2b95e;
     --aviso-suave: rgba(226, 185, 94, 0.12);
 }
@@ -378,20 +395,20 @@ a.dash-mes-botao:hover {
     --bs-btn-border-radius: 0.5rem;
 }
 
-/* ----- principal: sólido na cor da tinta ----- */
+/* ----- principal (Salvar, Cadastrar, Novo): verde sólido ----- */
 .btn-primary {
-    --bs-btn-color: var(--tinta-texto);
-    --bs-btn-bg: var(--tinta);
-    --bs-btn-border-color: var(--tinta);
-    --bs-btn-hover-color: var(--tinta-texto);
-    --bs-btn-hover-bg: var(--tinta-hover);
-    --bs-btn-hover-border-color: var(--tinta-hover);
-    --bs-btn-active-color: var(--tinta-texto);
-    --bs-btn-active-bg: var(--tinta-hover);
-    --bs-btn-active-border-color: var(--tinta-hover);
-    --bs-btn-disabled-color: var(--tinta-texto);
-    --bs-btn-disabled-bg: var(--tinta);
-    --bs-btn-disabled-border-color: var(--tinta);
+    --bs-btn-color: var(--verde-solido-texto);
+    --bs-btn-bg: var(--verde-solido);
+    --bs-btn-border-color: var(--verde-solido);
+    --bs-btn-hover-color: var(--verde-solido-texto);
+    --bs-btn-hover-bg: var(--verde-solido-hover);
+    --bs-btn-hover-border-color: var(--verde-solido-hover);
+    --bs-btn-active-color: var(--verde-solido-texto);
+    --bs-btn-active-bg: var(--verde-solido-hover);
+    --bs-btn-active-border-color: var(--verde-solido-hover);
+    --bs-btn-disabled-color: var(--verde-solido-texto);
+    --bs-btn-disabled-bg: var(--verde-solido);
+    --bs-btn-disabled-border-color: var(--verde-solido);
 }
 
 /* ----- confirmar (sucesso): verde sólido ----- */
@@ -410,21 +427,21 @@ a.dash-mes-botao:hover {
     --bs-btn-disabled-border-color: var(--verde-solido);
 }
 
-/* ----- editar e ações de apoio: verde suave, sem borda ----- */
+/* ----- editar e ações de apoio: preto com contorno e ícone; verde ao passar o mouse ----- */
 .btn-outline-primary,
 .btn-outline-success {
-    --bs-btn-color: var(--verde-texto);
-    --bs-btn-bg: var(--verde-suave);
-    --bs-btn-border-color: transparent;
-    --bs-btn-hover-color: var(--verde-texto);
-    --bs-btn-hover-bg: var(--verde-suave-forte);
-    --bs-btn-hover-border-color: transparent;
-    --bs-btn-active-color: var(--verde-texto);
-    --bs-btn-active-bg: var(--verde-suave-forte);
-    --bs-btn-active-border-color: transparent;
-    --bs-btn-disabled-color: var(--verde-texto);
-    --bs-btn-disabled-bg: var(--verde-suave);
-    --bs-btn-disabled-border-color: transparent;
+    --bs-btn-color: var(--neutro-texto);
+    --bs-btn-bg: var(--neutro-bg);
+    --bs-btn-border-color: var(--neutro-borda);
+    --bs-btn-hover-color: var(--verde-solido-texto);
+    --bs-btn-hover-bg: var(--verde-solido);
+    --bs-btn-hover-border-color: var(--verde-solido);
+    --bs-btn-active-color: var(--verde-solido-texto);
+    --bs-btn-active-bg: var(--verde-solido-hover);
+    --bs-btn-active-border-color: var(--verde-solido-hover);
+    --bs-btn-disabled-color: var(--neutro-texto);
+    --bs-btn-disabled-bg: var(--neutro-bg);
+    --bs-btn-disabled-border-color: var(--neutro-borda);
 }
 
 /* ----- secundário (Cancelar, Voltar, Limpar): contorno fino e neutro ----- */
@@ -456,19 +473,21 @@ a.dash-mes-botao:hover {
     --bs-btn-disabled-border-color: transparent;
 }
 
-/* ----- excluir: contorno neutro; o vermelho apagado só aparece ao passar o mouse ----- */
+/* ----- excluir: preto com contorno e ícone; vermelho ao passar o mouse ----- */
 .btn-outline-danger {
-    --bs-btn-color: var(--perigo);
-    --bs-btn-border-color: var(--linha);
-    --bs-btn-hover-color: var(--perigo);
-    --bs-btn-hover-bg: var(--perigo-suave);
-    --bs-btn-hover-border-color: var(--perigo-linha);
-    --bs-btn-active-color: var(--perigo);
-    --bs-btn-active-bg: var(--perigo-suave);
-    --bs-btn-active-border-color: var(--perigo-linha);
-    --bs-btn-disabled-color: var(--perigo);
-    --bs-btn-disabled-border-color: var(--linha);
-    --bs-btn-focus-shadow-rgb: 148, 80, 79;
+    --bs-btn-color: var(--neutro-texto);
+    --bs-btn-bg: var(--neutro-bg);
+    --bs-btn-border-color: var(--neutro-borda);
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: var(--perigo-vivo);
+    --bs-btn-hover-border-color: var(--perigo-vivo);
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: var(--perigo-vivo);
+    --bs-btn-active-border-color: var(--perigo-vivo);
+    --bs-btn-disabled-color: var(--neutro-texto);
+    --bs-btn-disabled-bg: var(--neutro-bg);
+    --bs-btn-disabled-border-color: var(--neutro-borda);
+    --bs-btn-focus-shadow-rgb: 201, 54, 59;
 }
 
 /* ----- excluir conta (confirmação final): vermelho apagado sólido ----- */
@@ -488,19 +507,21 @@ a.dash-mes-botao:hover {
     --bs-btn-focus-shadow-rgb: 148, 80, 79;
 }
 
-/* ----- aviso: âmbar suave ----- */
+/* ----- aviso (Bloquear): preto com contorno; âmbar ao passar o mouse ----- */
 .btn-outline-warning {
-    --bs-btn-color: var(--aviso);
-    --bs-btn-bg: var(--aviso-suave);
-    --bs-btn-border-color: transparent;
-    --bs-btn-hover-color: var(--aviso);
-    --bs-btn-hover-bg: var(--aviso-suave);
-    --bs-btn-hover-border-color: var(--aviso);
-    --bs-btn-active-color: var(--aviso);
-    --bs-btn-active-bg: var(--aviso-suave);
-    --bs-btn-active-border-color: var(--aviso);
-    --bs-btn-disabled-color: var(--aviso);
-    --bs-btn-disabled-border-color: transparent;
+    --bs-btn-color: var(--neutro-texto);
+    --bs-btn-bg: var(--neutro-bg);
+    --bs-btn-border-color: var(--neutro-borda);
+    --bs-btn-hover-color: #000000;
+    --bs-btn-hover-bg: var(--aviso-vivo);
+    --bs-btn-hover-border-color: var(--aviso-vivo);
+    --bs-btn-active-color: #000000;
+    --bs-btn-active-bg: var(--aviso-vivo);
+    --bs-btn-active-border-color: var(--aviso-vivo);
+    --bs-btn-disabled-color: var(--neutro-texto);
+    --bs-btn-disabled-bg: var(--neutro-bg);
+    --bs-btn-disabled-border-color: var(--neutro-borda);
+    --bs-btn-focus-shadow-rgb: 183, 121, 31;
 }
 
 .dash-card {
@@ -899,6 +920,14 @@ a.dash-mes-botao:hover {
 .card {
     --bs-card-border-color: var(--linha);
     --bs-card-border-radius: 0.9rem;
+}
+
+[data-bs-theme="dark"] .card {
+    --bs-card-bg: #0a0b0b;
+}
+
+[data-bs-theme="dark"] .table {
+    --bs-table-bg: transparent;
 }
 
 .card.shadow-sm {
