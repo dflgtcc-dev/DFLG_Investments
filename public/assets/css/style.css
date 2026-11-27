@@ -1092,3 +1092,33 @@ button.btn-primary[type="submit"]:not(.mt-4) {
     --bs-btn-active-bg: var(--tinta-hover);
     --bs-btn-active-border-color: var(--tinta-hover);
 }
+
+/* ==========================================================================
+   Perfil: Alterar senha e Excluir conta discretos, em cinza como o Desfazer.
+   Alterar senha clareia no hover; Excluir conta fica vermelho no hover.
+   (a tela de confirmação final da exclusão não muda)
+   ========================================================================== */
+a.btn-outline-primary:has(.bi-key),
+a.btn-danger:not(.btn-sm) {
+    --bs-btn-color: var(--bs-secondary-color);
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: var(--linha);
+}
+
+a.btn-outline-primary:has(.bi-key) {
+    --bs-btn-hover-color: var(--bs-emphasis-color);
+    --bs-btn-hover-bg: var(--linha);
+    --bs-btn-hover-border-color: var(--linha-forte);
+    --bs-btn-active-color: var(--bs-emphasis-color);
+    --bs-btn-active-bg: var(--linha);
+    --bs-btn-active-border-color: var(--linha-forte);
+}
+
+a.btn-danger:not(.btn-sm) {
+    --bs-btn-hover-color: var(--perigo-texto-hover);
+    --bs-btn-hover-bg: var(--perigo-fundo-hover);
+    --bs-btn-hover-border-color: var(--perigo-borda-hover);
+    --bs-btn-active-color: var(--perigo-texto-hover);
+    --bs-btn-active-bg: var(--perigo-fundo-hover);
+    --bs-btn-active-border-color: var(--perigo-borda-hover);
+}
