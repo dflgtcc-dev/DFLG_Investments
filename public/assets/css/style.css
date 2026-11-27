@@ -1127,12 +1127,12 @@ a.btn-danger:not(.btn-sm) {
 :root,
 [data-bs-theme="light"] {
     --confirmar-bg: #000000;
-    --confirmar-hover: #2e2e2e;
+    --confirmar-hover: #3d3d3d;
     --confirmar-texto: #ffffff;
 }
 
 [data-bs-theme="dark"] {
-    --confirmar-bg: #e1e4e2;
+    --confirmar-bg: #cfd2d0;
     --confirmar-hover: #ffffff;
     --confirmar-texto: #000000;
 }
